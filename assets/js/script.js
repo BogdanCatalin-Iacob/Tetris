@@ -12,7 +12,7 @@ const squares = createGridDivs();
  --------------------*/
 
 const lTetromino = [
-    [width + 2, width * 3, width * 3 + 1, width * 3 + 2],
+    [2, width, width + 1, width + 2],
     [1, width + 1, width * 2 + 1, width * 2 + 2],
     [0, 1, 2, width + 1],
     [1, 2, width + 2, width * 2 + 2]
@@ -62,17 +62,14 @@ const iTetromino = [
 
 const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
 
-let currentPosition = 4;
-let current = theTetrominoes[0][0];
-
-console.log(theTetrominoes);
+let startPosition = 4; // the tetrominoes will spawn at this index on the grid
 
 /*--------------------
 |      Functions      |
  --------------------*/
 
 /**
- * Create 200 divs for the grid layout
+ * Create 200 divs for the grid layout and return an array of divs
  */
 function createGridDivs() {
     for (let i = 0; i < 200; i++) {
@@ -80,3 +77,26 @@ function createGridDivs() {
     }
     return gridContainer.childNodes;;
 };
+
+/**
+ * Returns a random Tetromino shape at a random rotation
+ */
+function randomTetromino(){
+    let randomShape = Math.floor(Math.random() * theTetrominoes.length);
+    let randomRotation = Math.floor(Math.random() * theTetrominoes[randomShape].length);
+    let currentTetromino = theTetrominoes[randomShape][randomRotation];
+
+    return currentTetromino;
+}
+
+/**
+ * Draw the tetrominoes at the top of the grid 
+ */
+function drawTetromino(){
+    let current = randomTetromino();
+    current.forEach(index => {
+        squares[startPosition + index].classList.add("tetromino")
+    });
+};
+
+drawTetromino();
