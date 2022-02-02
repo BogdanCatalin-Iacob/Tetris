@@ -134,6 +134,8 @@ Home Page<br>
     * tecnisih.com Multi Device Website Mockup Generator was used to create the Mock up image in this README.
 * [Favicon](https://favicon.io/)
     * This was used to generate the icon on browser's tab.
+* [KeyCode](https://keycode.info/)
+    * Keycode website was used to get the arrow key codes to move the tetrominoes on the game board
 ***
 
 ## Testing
