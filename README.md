@@ -142,7 +142,11 @@ Home Page<br>
 
     -   #### Summary 
 
-        - 
+        - shapes hit the floor
+        - shapes hit left wall
+        - shapes hit right wall
+        - shapes hit another shape
+        - shapes hit walls or another shapes when rotate
 
     -   ### Test Results
 
@@ -162,7 +166,9 @@ Home Page<br>
 
 *  
 ### Issues and Resolutions to issues found during testing
-- 
+- Tetrominoes where passing through the bottom of the board:
+    - They were freezing at higher positions if manually set but when the setting was last row of the grid they were just passing down. <br>
+    I had to set a flag into freezeTetromino() and pass the return to moveDown() as condition to change the current position.
 
 ***
 ## Deployment
