@@ -65,6 +65,7 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 
 let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
 let currentTetromiono = randomTetromino();
+
 /*--------------------
 |      Functions      |
  --------------------*/
@@ -139,3 +140,34 @@ function freezeTetromino() {
     }
     return freeze;
 }
+
+/**
+ * Moves the tetromino left if no wall or other tetromino is taking the square
+ */
+function moveLeft(){
+    const isAtLeftEdge = currentTetromiono.some(index => (currentPosition + index) % width === 0);
+
+    if(!isAtLeftEdge){
+        undrawTetromino();
+        currentPosition -= 1;
+    }
+
+    if(currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))){
+        currentPosition += 1;
+    }
+    drawTetromino();
+}
+
+
+
+/*--------------------
+|   Event Listener    |
+ --------------------*/
+
+ function controls(event){
+    if(event.keyCode === 37){
+        moveLeft();
+    }
+}
+
+document.addEventListener("keyup", controls);
