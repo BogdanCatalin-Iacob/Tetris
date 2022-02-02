@@ -6,6 +6,7 @@ const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
 const squares = createGridDivs();
+let timerId = setInterval(moveDown, 1000);
 
 /*--------------------
 |      Tetrominoes    |
@@ -62,8 +63,8 @@ const iTetromino = [
 
 const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
 
-let startPosition = 4; // the tetrominoes will spawn at this index on the grid
-
+let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
+let currentTetromiono = randomTetromino();
 /*--------------------
 |      Functions      |
  --------------------*/
@@ -93,9 +94,9 @@ function randomTetromino(){
  * Draw the current Tetromino on the grid
  */
  function drawTetromino(){
-    let current = randomTetromino();
-    current.forEach(index => {
-        squares[startPosition + index].classList.add("tetromino");
+    
+    currentTetromiono.forEach(index => {
+        squares[currentPosition + index].classList.add("tetromino");
     });
 };
 
@@ -103,9 +104,13 @@ function randomTetromino(){
  * Undraw the current Tetromino from the grid
  */
 function undrawTetromino(){
-    randomTetromino().forEach(index => {
-        squares[startPosition + index].classList.remove("tetromino");
+    currentTetromiono.forEach(index => {
+        squares[currentPosition + index].classList.remove("tetromino");
     });
 };
 
-drawTetromino();
+function moveDown(){
+    undrawTetromino();
+    currentPosition += width;
+    drawTetromino();
+}
