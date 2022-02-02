@@ -23,7 +23,7 @@ const jTetromino = [
     [0, width, width + 1, width + 2],
     [0, 1, width, width * 2],
     [0, 1, 2, width + 2],
-    [2, width + 2, width *  2 + 1, width * 2 + 2,]
+    [2, width + 2, width * 2 + 1, width * 2 + 2, ]
 ];
 
 const sTetromino = [
@@ -77,12 +77,12 @@ function createGridDivs() {
         gridContainer.innerHTML += `<div class="square"></div>`
     }
     return gridContainer.childNodes;;
-};
+}
 
 /**
  * Returns a random Tetromino shape at a random rotation
  */
-function randomTetromino(){
+function randomTetromino() {
     let randomShape = Math.floor(Math.random() * theTetrominoes.length);
     let randomRotation = Math.floor(Math.random() * theTetrominoes[randomShape].length);
     let currentTetromino = theTetrominoes[randomShape][randomRotation];
@@ -91,32 +91,51 @@ function randomTetromino(){
 }
 
 /*
-FIX: Had to take out current tetromino from drw function due to randomly displaying
+FIX: Had to take out current tetromino from draw function due to randomly displaying
  different shapes every time it move down
- */ 
+ */
 /**
  * Draw the current Tetromino on the grid
  */
- function drawTetromino(){
+function drawTetromino() {
     currentTetromiono.forEach(index => {
         squares[currentPosition + index].classList.add("tetromino");
     });
-};
+}
 
 /**
  * Undraw the current Tetromino from the grid
  */
-function undrawTetromino(){
+function undrawTetromino() {
     currentTetromiono.forEach(index => {
         squares[currentPosition + index].classList.remove("tetromino");
     });
-};
+}
 
 /**
  * Moves the current tetromino down on the grid by 1 row
  */
-function moveDown(){
+function moveDown() {
     undrawTetromino();
-    currentPosition += width;
+    if (!freezeTetromino()) {
+        currentPosition += width;
+    }
     drawTetromino();
+    freezeTetromino();
+}
+
+/**
+ * Returns true if the tetromino touches the bottom of the grid or another tetromino already frozen
+ */
+function freezeTetromino() {
+    let freeze = false;
+    if (currentTetromiono.some(index =>
+            (currentPosition + index + width > 199) ||
+            (squares[currentPosition + index + width].classList.contains("taken")))) {
+        freeze = true;
+        currentTetromiono.forEach(index => squares[currentPosition + index].classList.add("taken"));
+        currentTetromiono = randomTetromino();
+        currentPosition = 4;
+    }
+    return freeze;
 }
