@@ -92,7 +92,7 @@ function randomTetromino(){
 /**
  * Draw the tetrominoes at the top of the grid 
  */
-function drawTetromino(){
+ function drawTetromino(){
     let current = randomTetromino();
     current.forEach(index => {
         squares[startPosition + index].classList.add("tetromino")
