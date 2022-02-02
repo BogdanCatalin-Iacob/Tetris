@@ -109,6 +109,9 @@ function undrawTetromino(){
     });
 };
 
+/**
+ * Moves the current tetromino down on the grid by 1 row
+ */
 function moveDown(){
     undrawTetromino();
     currentPosition += width;
