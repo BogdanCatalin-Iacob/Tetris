@@ -44,10 +44,11 @@ The live website can be found [here]().
 -   ### User stories
 
     -   #### First Time Visitor Goals
-        1. 
+        1. I want to view the game and content clearly on my mobile device.
+        2. I want to find the game instructions easily
 
     -   #### Returning Visitor Goals
-        1. 
+        1. I want my high score to be saved for next time I play
 
     -   #### Frequent User Goals
         1. 
