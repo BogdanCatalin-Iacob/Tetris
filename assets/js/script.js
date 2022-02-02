@@ -90,13 +90,20 @@ function randomTetromino(){
 }
 
 /**
- * Draw the tetrominoes at the top of the grid 
+ * Draw the current Tetromino on the grid
  */
  function drawTetromino(){
     let current = randomTetromino();
     current.forEach(index => {
-        squares[startPosition + index].classList.add("tetromino")
+        squares[startPosition + index].classList.add("tetromino");
     });
 };
 
-drawTetromino();
+/**
+ * Undraw the current Tetromino from the grid
+ */
+function undrawTetromino(){
+    randomTetromino().forEach(index => {
+        squares[startPosition + index].classList.remove("tetromino");
+    });
+};
