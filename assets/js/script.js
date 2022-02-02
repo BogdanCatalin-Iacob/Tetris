@@ -151,7 +151,7 @@ function moveLeft(){
         undrawTetromino();
         currentPosition -= 1;
     }
-    
+
 //if the left square is taken move the tetromino back 1 square so it appears not moved
     if(currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))){
         currentPosition += 1;
@@ -168,6 +168,12 @@ function moveLeft(){
  function controls(event){
     if(event.keyCode === 37){
         moveLeft();
+    }else if(event.keyCode === 38){
+        //rotate();
+    }else if(event.keyCode === 39){
+        //moveRight();
+    }else if(event.keyCode === 40){
+        moveDown();
     }
 }
 
