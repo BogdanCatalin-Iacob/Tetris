@@ -90,11 +90,14 @@ function randomTetromino(){
     return currentTetromino;
 }
 
+/*
+FIX: Had to take out current tetromino from drw function due to randomly displaying
+ different shapes every time it move down
+ */ 
 /**
  * Draw the current Tetromino on the grid
  */
  function drawTetromino(){
-    
     currentTetromiono.forEach(index => {
         squares[currentPosition + index].classList.add("tetromino");
     });
