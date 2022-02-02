@@ -14,15 +14,15 @@ const squares = createGridDivs();
 const lTetromino = [
     [2, width, width + 1, width + 2],
     [1, width + 1, width * 2 + 1, width * 2 + 2],
-    [0, 1, 2, width + 1],
+    [0, 1, 2, width],
     [1, 2, width + 2, width * 2 + 2]
 ];
 
 const jTetromino = [
     [0, width, width + 1, width + 2],
     [0, 1, width, width * 2],
-    [0, 1, 2, width],
-    [2, width + 2, width * 2 + 2]
+    [0, 1, 2, width + 2],
+    [2, width + 2, width *  2 + 1, width * 2 + 2,]
 ];
 
 const sTetromino = [
@@ -33,9 +33,9 @@ const sTetromino = [
 ];
 
 const zTetromino = [
-    [1, 2, width + 1, width + 2],
+    [0, 1, width + 1, width + 2],
     [1, width, width + 1, width * 2],
-    [1, 2, width + 1, width + 2],
+    [0, 1, width + 1, width + 2],
     [1, width, width + 1, width * 2]
 ];
 
@@ -107,3 +107,5 @@ function undrawTetromino(){
         squares[startPosition + index].classList.remove("tetromino");
     });
 };
+
+drawTetromino();
