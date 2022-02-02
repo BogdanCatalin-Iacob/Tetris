@@ -151,7 +151,8 @@ function moveLeft(){
         undrawTetromino();
         currentPosition -= 1;
     }
-
+    
+//if the left square is taken move the tetromino back 1 square so it appears not moved
     if(currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))){
         currentPosition += 1;
     }
