@@ -145,10 +145,11 @@ function freezeTetromino() {
  * Moves the tetromino left if no wall or other tetromino is taking the square
  */
 function moveLeft() {
+    undrawTetromino();
+
     const isAtLeftEdge = currentTetromiono.some(index => (currentPosition + index) % width === 0);
 
-    if (!isAtLeftEdge) {
-        undrawTetromino();
+    if (!isAtLeftEdge) {    
         currentPosition -= 1;
     }
 
