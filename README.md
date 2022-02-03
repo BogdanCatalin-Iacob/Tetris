@@ -173,6 +173,12 @@ Home Page<br>
     - They were freezing at higher positions if manually set but when the setting was last row of the grid they were just passing down. <br>
     I had to set a flag into freezeTetromino() and pass the return to moveDown() as condition to change the current position.
 
+- Tetromino rotation was changing the randomly selected shape to the same one after first rotation
+    - I had to refactor and return three values from the randomTetromino() function:
+        - currentTetrominoShape - the piece placed on the gameboard
+        - randomShape - the piece randomly selected in the pieces array (theTetrominoes)
+        - randomRotation - the rotation of the tetromino when it is spawned
+    and destructure this in new variables to be used to redraw the same shape with a different rotation.
 ***
 ## Deployment
 
