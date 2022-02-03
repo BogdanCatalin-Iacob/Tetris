@@ -103,6 +103,7 @@ function drawTetromino() {
         squares[currentPosition + index].classList.add("tetromino");
     });
 }
+drawTetromino();
 
 /**
  * Undraw the current Tetromino from the grid
@@ -137,6 +138,7 @@ function freezeTetromino() {
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
         [currentTetromino, currentShape, currentRotation] = randomTetromino();
         currentPosition = 4;
+        drawTetromino();
     }
     return freeze;
 }
@@ -179,18 +181,17 @@ function moveRight() {
     drawTetromino();
 }
 
-function rotate(){
+function rotate() {
     undrawTetromino();
 
     currentRotation++;
 
-    if(currentRotation === currentTetromino.length){
+    if (currentRotation === currentTetromino.length) {
         currentRotation = 0;
     }
     currentTetromino = theTetrominoes[currentShape][currentRotation];
     drawTetromino();
 }
-
 
 /*--------------------
 |   Event Listener    |
