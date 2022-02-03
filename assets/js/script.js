@@ -6,6 +6,8 @@ const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
 const squares = createGridDivs();
+
+let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
 let timerId = setInterval(moveDown, 1000);
 
 /*--------------------
@@ -63,9 +65,6 @@ const iTetromino = [
 
 const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromino, oTetromino, iTetromino];
 
-let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
-let currentTetromiono = randomTetromino();
-
 /*--------------------
 |      Functions      |
  --------------------*/
@@ -80,15 +79,16 @@ function createGridDivs() {
     return gridContainer.childNodes;;
 }
 
+let currentTetromino = randomTetromino()[0];
 /**
  * Returns a random Tetromino shape at a random rotation
  */
 function randomTetromino() {
     let randomShape = Math.floor(Math.random() * theTetrominoes.length);
     let randomRotation = Math.floor(Math.random() * theTetrominoes[randomShape].length);
-    let currentTetromino = theTetrominoes[randomShape][randomRotation];
+    let currentTetrominoShape = theTetrominoes[randomShape][randomRotation];
 
-    return currentTetromino;
+    return [currentTetrominoShape, randomShape, randomRotation];
 }
 
 /*
@@ -99,7 +99,7 @@ FIX: Had to take out current tetromino from draw function due to randomly displa
  * Draw the current Tetromino on the grid
  */
 function drawTetromino() {
-    currentTetromiono.forEach(index => {
+    currentTetromino.forEach(index => {
         squares[currentPosition + index].classList.add("tetromino");
     });
 }
@@ -108,7 +108,7 @@ function drawTetromino() {
  * Undraw the current Tetromino from the grid
  */
 function undrawTetromino() {
-    currentTetromiono.forEach(index => {
+    currentTetromino.forEach(index => {
         squares[currentPosition + index].classList.remove("tetromino");
     });
 }
@@ -130,12 +130,12 @@ function moveDown() {
  */
 function freezeTetromino() {
     let freeze = false;
-    if (currentTetromiono.some(index =>
+    if (currentTetromino.some(index =>
             (currentPosition + index + width > 199) ||
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
-        currentTetromiono.forEach(index => squares[currentPosition + index].classList.add("taken"));
-        currentTetromiono = randomTetromino();
+        currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
+        currentTetromino = randomTetromino()[0];
         currentPosition = 4;
     }
     return freeze;
@@ -147,14 +147,14 @@ function freezeTetromino() {
 function moveLeft() {
     undrawTetromino();
 
-    const isAtLeftEdge = currentTetromiono.some(index => (currentPosition + index) % width === 0);
+    const isAtLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0);
 
-    if (!isAtLeftEdge) {    
+    if (!isAtLeftEdge) {
         currentPosition -= 1;
     }
 
     //if the left square is taken, move the tetromino back 1 square so it appears not moved
-    if (currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))) {
+    if (currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"))) {
         currentPosition += 1;
     }
     drawTetromino();
@@ -166,18 +166,19 @@ function moveLeft() {
 function moveRight() {
     undrawTetromino();
 
-    const isAtRightEdge = currentTetromiono.some(index => (currentPosition + index) % width === width - 1);
+    const isAtRightEdge = currentTetromino.some(index => (currentPosition + index) % width === width - 1);
 
     if (!isAtRightEdge) {
         currentPosition += 1;
     }
 
     //if the right square is taken, move the tetromino back 1 square so it appears not moved
-    if (currentTetromiono.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+    if (currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         currentPosition -= 1;
     }
     drawTetromino();
 }
+
 
 /*--------------------
 |   Event Listener    |
