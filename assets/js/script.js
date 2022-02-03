@@ -144,35 +144,52 @@ function freezeTetromino() {
 /**
  * Moves the tetromino left if no wall or other tetromino is taking the square
  */
-function moveLeft(){
+function moveLeft() {
     const isAtLeftEdge = currentTetromiono.some(index => (currentPosition + index) % width === 0);
 
-    if(!isAtLeftEdge){
+    if (!isAtLeftEdge) {
         undrawTetromino();
         currentPosition -= 1;
     }
 
-//if the left square is taken move the tetromino back 1 square so it appears not moved
-    if(currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))){
+    //if the left square is taken, move the tetromino back 1 square so it appears not moved
+    if (currentTetromiono.some(index => squares[currentPosition + index].classList.contains("taken"))) {
         currentPosition += 1;
     }
     drawTetromino();
 }
 
+/**
+ * Moves the tetromino right if no wall or other tetromino is taking the square
+ */
+function moveRight() {
+    undrawTetromino();
 
+    const isAtRightEdge = currentTetromiono.some(index => (currentPosition + index) % width === width - 1);
+
+    if (!isAtRightEdge) {
+        currentPosition += 1;
+    }
+
+    //if the right square is taken, move the tetromino back 1 square so it appears not moved
+    if (currentTetromiono.some(index => squares[currentPosition + index].classList.contains('taken'))) {
+        currentPosition -= 1;
+    }
+    drawTetromino();
+}
 
 /*--------------------
 |   Event Listener    |
  --------------------*/
 
- function controls(event){
-    if(event.keyCode === 37){
+function controls(event) {
+    if (event.keyCode === 37) {
         moveLeft();
-    }else if(event.keyCode === 38){
+    } else if (event.keyCode === 38) {
         //rotate();
-    }else if(event.keyCode === 39){
-        //moveRight();
-    }else if(event.keyCode === 40){
+    } else if (event.keyCode === 39) {
+        moveRight();
+    } else if (event.keyCode === 40) {
         moveDown();
     }
 }
