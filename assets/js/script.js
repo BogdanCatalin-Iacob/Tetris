@@ -8,7 +8,7 @@ const gridContainer = document.getElementById("grid-container");
 const squares = createGridDivs();
 
 let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
-let timerId = setInterval(moveDown, 1000);
+let timerId;
 
 /*--------------------
 |      Tetrominoes    |
@@ -103,7 +103,6 @@ function drawTetromino() {
         squares[currentPosition + index].classList.add("tetromino");
     });
 }
-drawTetromino();
 
 /**
  * Undraw the current Tetromino from the grid
@@ -138,7 +137,7 @@ function freezeTetromino() {
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
         [currentTetromino, currentShape, currentRotation] = randomTetromino();
         currentPosition = 4;
-        drawTetromino();
+        drawTetromino(); //display the tetromino from the first row of the grid
     }
     return freeze;
 }
@@ -210,3 +209,14 @@ function controls(event) {
 }
 
 document.addEventListener("keyup", controls);
+
+playButton.addEventListener("click", () => {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        } else {
+            drawTetromino();
+            timerId = setInterval(moveDown, 1000);
+        }
+    }
+);
