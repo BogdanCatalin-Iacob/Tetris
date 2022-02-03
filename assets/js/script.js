@@ -79,7 +79,7 @@ function createGridDivs() {
     return gridContainer.childNodes;;
 }
 
-let currentTetromino = randomTetromino()[0];
+let [currentTetromino, currentShape, currentRotation] = randomTetromino();
 /**
  * Returns a random Tetromino shape at a random rotation
  */
@@ -135,7 +135,7 @@ function freezeTetromino() {
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
-        currentTetromino = randomTetromino()[0];
+        [currentTetromino, currentShape, currentRotation] = randomTetromino();
         currentPosition = 4;
     }
     return freeze;
@@ -179,6 +179,18 @@ function moveRight() {
     drawTetromino();
 }
 
+function rotate(){
+    undrawTetromino();
+
+    currentRotation++;
+
+    if(currentRotation === currentTetromino.length){
+        currentRotation = 0;
+    }
+    currentTetromino = theTetrominoes[currentShape][currentRotation];
+    drawTetromino();
+}
+
 
 /*--------------------
 |   Event Listener    |
@@ -188,7 +200,7 @@ function controls(event) {
     if (event.keyCode === 37) {
         moveLeft();
     } else if (event.keyCode === 38) {
-        //rotate();
+        rotate();
     } else if (event.keyCode === 39) {
         moveRight();
     } else if (event.keyCode === 40) {
