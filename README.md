@@ -179,6 +179,9 @@ Home Page<br>
         - randomShape - the piece randomly selected in the pieces array (theTetrominoes)
         - randomRotation - the rotation of the tetromino when it is spawned
     and destructure this in new variables to be used to redraw the same shape with a different rotation.
+
+- Removing full rows to add score in addScore() function :
+    - refactor variable square from const to let and assign an Array.from() grid childNodes to be able to slice() the full rows and add the same number of rows at the top of the grid so it won't appear smaller
 ***
 ## Deployment
 
