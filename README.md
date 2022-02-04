@@ -242,7 +242,10 @@ Home Page<br>
    
 
 -   ### Content
-    - 
+    - The game is developed based on some rules found on [tetris wiki](https://tetris.fandom.com/wiki/Tetris_Wiki):
+        - bricks color
+        - movement
+        - rotation
 
 -   ### Media
     - 
