@@ -1,11 +1,17 @@
 const width = 10; //number of squares on a row
-const topScore = document.getElementById("top-score");
-const score = document.getElementById("score");
-const level = document.getElementById("level");
+const displayTopScore = document.getElementById("top-score");
+const displayScore = document.getElementById("score");
+const displayLevel = document.getElementById("level");
 const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
-let squares = Array.from(createGridDivs());
+
+//it has to be an Array to be manipulated in addScore()
+let squares = Array.from(createGridDivs()); 
+
+let score = 0;
+let topScore = 0;
+let level = 1;
 
 let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
 let timerId;
@@ -181,6 +187,9 @@ function moveRight() {
     drawTetromino();
 }
 
+/**
+ * Rotate the tetromino clockwise
+ */
 function rotate() {
     undrawTetromino();
 
@@ -193,30 +202,43 @@ function rotate() {
     drawTetromino();
 }
 
-// function addScore() {
-//     for (let i = 0; i < 199; i += width) {
-//         const row = [
-//             i,
-//             i + 1,
-//             i + 2,
-//             i + 3,
-//             i + 4,
-//             i + 5,
-//             i + 6,
-//             i + 7,
-//             i + 8,
-//             i + 9
-//         ];
-//         if(row.every( index => squares[index].classList.contains('taken'))){
-//             score.innerHTML += 10;
-//             row.forEach(index => squares[index].classList.remove('taken'));
-//             const removedSquares = squares.splice(i, width);
-//             console.log(removedSquares);
-//             squares = removedSquares.concat(squares);
-//             squares.forEach(square => gridContainer.appendChild(square));
-//         }
-//     }
-// }
+/**
+ * Removes full rows, add and display score, top score
+ */
+function addScore() {
+    for (let i = 0; i < 199; i += width) {
+        const row = [
+            i,
+            i + 1,
+            i + 2,
+            i + 3,
+            i + 4,
+            i + 5,
+            i + 6,
+            i + 7,
+            i + 8,
+            i + 9
+        ];
+        if(row.every( index => squares[index].classList.contains('taken'))){
+            //display score and top score
+            score += 10;
+            (topScore < score) ? topScore = score : topScore;
+            displayTopScore.innerHTML = topScore;
+            displayScore.innerHTML = score;
+
+            //make each cell of the full row hidden and available
+            row.forEach(index => {
+                squares[index].classList.remove('taken');
+                squares[index].classList.remove("tetromino");
+            });
+
+            //remove the full rows and add the same number of rows at the top of the grid
+            const removedSquares = squares.splice(i, width);
+            squares = removedSquares.concat(squares);
+            squares.forEach(square => gridContainer.appendChild(square));
+        }
+    }
+}
 
 /*--------------------
 |   Event Listener    |
