@@ -7,7 +7,7 @@ const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
 
 //it has to be an Array to be manipulated in addScore()
-let squares = Array.from(createGridDivs()); 
+let squares = Array.from(createGridDivs());
 
 let score = 0;
 let topScore = 0;
@@ -140,10 +140,20 @@ function freezeTetromino() {
             (currentPosition + index + width > 199) ||
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
-        currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
-        [currentTetromino, currentShape, currentRotation] = randomTetromino();
-        currentPosition = 4;
-        drawTetromino(); //display the tetromino from the first row of the grid
+
+        setTimeout(lockTetromino, 500);
+
+        /**
+         * lock the piece in place (can't be moved anymore)
+         */
+        function lockTetromino() {
+            currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
+
+            //generate new tetromino
+            [currentTetromino, currentShape, currentRotation] = randomTetromino();
+            currentPosition = 4;
+            drawTetromino(); //display the tetromino from the first row of the grid
+        }
         addScore();
     }
     return freeze;
@@ -219,10 +229,10 @@ function addScore() {
             i + 8,
             i + 9
         ];
-        if(row.every( index => squares[index].classList.contains('taken'))){
+        if (row.every(index => squares[index].classList.contains('taken'))) {
             //display score and top score
             score += 10;
-            (topScore < score) ? topScore = score : topScore;
+            (topScore < score) ? topScore = score: topScore;
             displayTopScore.innerHTML = topScore;
             displayScore.innerHTML = score;
 
