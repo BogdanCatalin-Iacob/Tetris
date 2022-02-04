@@ -6,6 +6,10 @@
     * [Returning Visitor Goals](#Returning-Visitor-Goals)
     * [Frequent User Goals](#Frequent-User-Goals)
   * [Structure](#Structure)
+    * [General Information](#General-Information)
+    * [Game Mechanics](#Game-Mechanics)
+    * [Methods Of Play](#Methods-Of-Play)
+    * [Diagram Legend](#Diagram-Legend)
   * [Design](#Design)
     * [Colour Scheme](#Colour-Scheme)
     * [Typography](#Typography)
@@ -54,6 +58,24 @@ The live website can be found [here]().
         1. 
 
 -   ### Structure
+
+    -   #### General Information
+        - The website will have two pages. The main page will display the Tetris game and the secondary page will be a 404 error page.
+        - The largest part of the tetrion consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
+        - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a given orientation and color depending on its shape. Part of the tetrion, called the piece preview, shows the next pieces that will enter the playfield.
+        - The player can rotate the falling tetromino ninety degrees at a time within the plane of the playfield by pressing the clockwise rotation button (Arrow Up) if the piece has room to rotate.
+        - The player can shift the falling tetromino sideways one space at a time by pressing the left or right arrow. Pieces cannot shift through walls or other blocks.
+        - Each tetromino moves downward slowly by itself. Generally a player can use some method to "drop" the tetromino, or make it move downward faster. Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in which time the player can move it. After locking, a player can no longer move the tetromino.
+        - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
+        - If the playfield has not filled up with blocks, the next piece enters.
+        
+    -   #### Game Mechanics
+
+    -   #### Methods Of PLay
+
+    -   #### Diagram Legend
+
+
 
 The purpose of this is to fulfill user story:
 > 
