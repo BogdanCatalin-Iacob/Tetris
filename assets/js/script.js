@@ -5,7 +5,7 @@ const level = document.getElementById("level");
 const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
-const squares = createGridDivs();
+let squares = Array.from(createGridDivs());
 
 let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
 let timerId;
@@ -138,6 +138,7 @@ function freezeTetromino() {
         [currentTetromino, currentShape, currentRotation] = randomTetromino();
         currentPosition = 4;
         drawTetromino(); //display the tetromino from the first row of the grid
+        addScore();
     }
     return freeze;
 }
@@ -192,6 +193,31 @@ function rotate() {
     drawTetromino();
 }
 
+// function addScore() {
+//     for (let i = 0; i < 199; i += width) {
+//         const row = [
+//             i,
+//             i + 1,
+//             i + 2,
+//             i + 3,
+//             i + 4,
+//             i + 5,
+//             i + 6,
+//             i + 7,
+//             i + 8,
+//             i + 9
+//         ];
+//         if(row.every( index => squares[index].classList.contains('taken'))){
+//             score.innerHTML += 10;
+//             row.forEach(index => squares[index].classList.remove('taken'));
+//             const removedSquares = squares.splice(i, width);
+//             console.log(removedSquares);
+//             squares = removedSquares.concat(squares);
+//             squares.forEach(square => gridContainer.appendChild(square));
+//         }
+//     }
+// }
+
 /*--------------------
 |   Event Listener    |
  --------------------*/
@@ -211,12 +237,11 @@ function controls(event) {
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", () => {
-        if (timerId) {
-            clearInterval(timerId);
-            timerId = null;
-        } else {
-            drawTetromino();
-            timerId = setInterval(moveDown, 1000);
-        }
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+    } else {
+        drawTetromino();
+        timerId = setInterval(moveDown, 1000);
     }
-);
+});
