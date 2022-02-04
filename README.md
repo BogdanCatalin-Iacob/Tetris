@@ -7,6 +7,7 @@
     * [Frequent User Goals](#Frequent-User-Goals)
   * [Structure](#Structure)
     * [General Information](#General-Information)
+    * [List Of Rules](#list-of-rules)
     * [Game Mechanics](#Game-Mechanics)
     * [Methods Of Play](#Methods-Of-Play)
     * [Diagram Legend](#Diagram-Legend)
@@ -68,7 +69,27 @@ The live website can be found [here]().
         - Each tetromino moves downward slowly by itself. Generally a player can use some method to "drop" the tetromino, or make it move downward faster. Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in which time the player can move it. After locking, a player can no longer move the tetromino.
         - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
         - If the playfield has not filled up with blocks, the next piece enters.
-        
+
+    -   #### List Of Rules
+        - Playfield is 10 columns x 20 rows.
+        - Tetromino colors are as follows:
+            - l shape - Cyan
+            - o shape - Yellow
+            - t shape - Purple
+            - s shape - Green
+            - z shape - Red
+            - j shape - Blue
+            - L shape - Orange
+        - Immediately drop one space if no existing Block is in its path
+        - The pieces selection will be done random from all available pieces
+        - Initial rotation will be selected random from all possible piece rotations
+        - Standard mapping for keyboard:
+            - Up Arrow - rotate piece 90deg clockwise
+            - Left Arrow - move the oiece to left one cell if no obstruction
+            - Right Arrow - move the piece to right by one cell if no obstruction
+            - Down Arrow - move the piece down faster
+        - Use of half second lock delay
+
     -   #### Game Mechanics
 
     -   #### Methods Of PLay
