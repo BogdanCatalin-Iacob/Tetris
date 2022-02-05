@@ -15,6 +15,7 @@ let level = 1;
 
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
 let timerId;
+setMiniGrid();
 
 /*--------------------
 |      Tetrominoes    |
@@ -83,6 +84,27 @@ function createGridDivs() {
         gridContainer.innerHTML += `<div class="square"></div>`
     }
     return gridContainer.childNodes;;
+}
+
+/**
+ * Display a mini grid 4x4 in the top right corner of the game board
+ */
+function setMiniGrid() {
+    let miniGrid = [];
+
+    //select only the last 4 squares of the first 4 rows in the main grid
+    for (let i = 0; i < 40; i++) {
+        let allTrue =
+            i >= 6 && i < 10 ||
+            i >= 16 && i < 20 ||
+            i >= 26 && i < 30 ||
+            i >= 36 && i < 40;
+
+        if (allTrue) {
+            miniGrid.push(i);
+            squares[i].classList.add('mini-grid');
+        }
+    }
 }
 
 let [currentTetromino, currentShape, currentRotation] = randomTetromino();
