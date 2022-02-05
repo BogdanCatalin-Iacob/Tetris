@@ -193,18 +193,57 @@ function moveRight() {
     drawTetromino();
 }
 
+
+
+/*
+FIX rotation of the tetrominoes at the edge of the board
+credit: Ania Kubow (https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
+*/
+/**
+ * Check if the tetromino is at the right edge of the board
+ */
+function isAtRight() {
+    return currentTetromino.some(index => (currentPosition + index + 1) % width === 0)
+}
+
+/**
+ * Check if the tetromino is at the leftt edge of the board
+ */
+function isAtLeft() {
+    return currentTetromino.some(index => (currentPosition + index) % width === 0)
+}
+
+/**
+ * Check the position for next rotation of the shape at the edge of the board
+ * before it is displayed in the new position
+ */
+function checkRotatedPosition(P) {
+    P = P || currentPosition //get current position.  Then, check if the piece is near the left side.
+    if ((P + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+        if (isAtRight()) { //use actual position to check if it's flipped over to right side
+            currentPosition += 1 //if so, add one to wrap it back around
+            checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+        }
+    } else if (P % width > 5) {
+        if (isAtLeft()) {
+            currentPosition -= 1
+            checkRotatedPosition(P)
+        }
+    }
+}
+
+
 /**
  * Rotate the tetromino clockwise
  */
 function rotate() {
     undrawTetromino();
-
     currentRotation++;
-
     if (currentRotation === currentTetromino.length) {
         currentRotation = 0;
     }
     currentTetromino = theTetrominoes[currentShape][currentRotation];
+    checkRotatedPosition();
     drawTetromino();
 }
 
@@ -250,7 +289,7 @@ function addScore() {
  * When the tetrominoes touch the top of the game board the game ends
  */
 function gameOver() {
-//check the row under miniGrid (row 5 of the main grid) for any taken square
+    //check the row under miniGrid (row 5 of the main grid) for any taken square
     for (let i = 40; i <= 49; i++) {
         if (squares[i].classList.contains('taken')) {
             displayScore.innerHTML = 'end';
@@ -264,7 +303,9 @@ function gameOver() {
 /*--------------------
 |   Event Listener    |
  --------------------*/
-
+/**
+ * Assign keyboard buttons to control the tetrominoes
+ */
 function controls(event) {
     if (event.keyCode === 37) {
         moveLeft();
