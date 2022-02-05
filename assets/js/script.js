@@ -269,6 +269,17 @@ function rotate() {
     drawTetromino();
 }
 
+function rotateAntiClockwise() {
+    undrawTetromino();
+    currentRotation--;
+    if (currentRotation === -1) {
+        currentRotation = currentTetromino.length - 1;
+    }
+    currentTetromino = theTetrominoes[currentShape][currentRotation];
+    checkRotatedPosition();
+    drawTetromino();
+}
+
 /**
  * Removes full rows, add and display score, top score
  */
@@ -333,7 +344,9 @@ function controls(event) {
         moveLeft();
     } else if (event.keyCode === 38) {
         rotate();
-    } else if (event.keyCode === 39) {
+    } else if(event.keyCode === 90){
+        rotateAntiClockwise();
+    }else if (event.keyCode === 39) {
         moveRight();
     } else if (event.keyCode === 40) {
         moveDown();
