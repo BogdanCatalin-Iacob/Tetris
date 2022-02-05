@@ -13,7 +13,7 @@ let score = 0;
 let topScore = 0;
 let level = 1;
 
-let currentPosition = 4; // the tetrominoes will spawn at this index on the grid
+let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
 let timerId;
 
 /*--------------------
@@ -79,7 +79,7 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
  * Create 200 divs for the grid layout and return an array of divs
  */
 function createGridDivs() {
-    for (let i = 0; i < 220; i++) {
+    for (let i = 0; i < 240; i++) {
         gridContainer.innerHTML += `<div class="square"></div>`
     }
     return gridContainer.childNodes;;
@@ -128,25 +128,29 @@ function moveDown() {
         currentPosition += width;
     }
     drawTetromino();
-    setTimeout(freezeTetromino,500);
+    //gives the chance to move / slide the tetromino before it locks in place
+    setTimeout(freezeTetromino, 500);
 }
 
 /**
- * Returns true if the tetromino touches the bottom of the grid or another tetromino already frozen
+ * When the tetromino touches the bottom of the grid or
+ * another tetromino already frozen, it will lock in place
+ * and generate a new random shape
  */
 function freezeTetromino() {
     let freeze = false;
     if (currentTetromino.some(index =>
-            (currentPosition + index + width > 199) ||
+            (currentPosition + index + width > squares.length - 1) ||
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
-        
+
         //generate new tetromino
         [currentTetromino, currentShape, currentRotation] = randomTetromino();
-        currentPosition = 4;
-        drawTetromino();//display the tetromino from the first row of the grid
+        currentPosition = 6; //reset spawn position
+        drawTetromino(); //display the tetromino from the first row of the grid
         addScore();
+        gameOver();    
     }
     return freeze;
 }
@@ -240,6 +244,17 @@ function addScore() {
             squares.forEach(square => gridContainer.appendChild(square));
         }
     }
+}
+
+/**
+ * When the tetrominoes touch the top of the game board the game ends
+ */
+function gameOver(){
+     if(currentTetromino.some(index => squares[currentPosition + index + 40].classList.contains('taken'))){
+         displayScore.innerHTML = 'end';
+         clearInterval(timerId);
+         timerId = null;
+     }
 }
 
 /*--------------------
