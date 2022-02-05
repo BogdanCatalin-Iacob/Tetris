@@ -239,6 +239,7 @@ Home Page<br>
 ***
 ## Credits
 -   ### Code
+    - The code for tetromino rotation at the edge of the board (left / right) was taken from [Ania Kubow](https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
    
 
 -   ### Content
