@@ -79,7 +79,7 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
  * Create 200 divs for the grid layout and return an array of divs
  */
 function createGridDivs() {
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 220; i++) {
         gridContainer.innerHTML += `<div class="square"></div>`
     }
     return gridContainer.childNodes;;
@@ -128,7 +128,7 @@ function moveDown() {
         currentPosition += width;
     }
     drawTetromino();
-    freezeTetromino();
+    setTimeout(freezeTetromino,500);
 }
 
 /**
@@ -140,20 +140,12 @@ function freezeTetromino() {
             (currentPosition + index + width > 199) ||
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
-
-        setTimeout(lockTetromino, 500);
-
-        /**
-         * lock the piece in place (can't be moved anymore)
-         */
-        function lockTetromino() {
-            currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
-
-            //generate new tetromino
-            [currentTetromino, currentShape, currentRotation] = randomTetromino();
-            currentPosition = 4;
-            drawTetromino(); //display the tetromino from the first row of the grid
-        }
+        currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
+        
+        //generate new tetromino
+        [currentTetromino, currentShape, currentRotation] = randomTetromino();
+        currentPosition = 4;
+        drawTetromino();//display the tetromino from the first row of the grid
         addScore();
     }
     return freeze;
