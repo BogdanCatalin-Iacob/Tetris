@@ -253,7 +253,6 @@ function gameOver() {
 //check the row under miniGrid (row 5 of the main grid) for any taken square
     for (let i = 40; i <= 49; i++) {
         if (squares[i].classList.contains('taken')) {
-            //  if(currentTetromino.some(index => squares[currentPosition + index + 10].classList.contains('taken'))){
             displayScore.innerHTML = 'end';
             clearInterval(timerId);
             timerId = null;
