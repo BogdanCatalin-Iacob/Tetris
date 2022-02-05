@@ -150,7 +150,7 @@ function freezeTetromino() {
         currentPosition = 6; //reset spawn position
         drawTetromino(); //display the tetromino from the first row of the grid
         addScore();
-        gameOver();    
+        gameOver();
     }
     return freeze;
 }
@@ -249,12 +249,17 @@ function addScore() {
 /**
  * When the tetrominoes touch the top of the game board the game ends
  */
-function gameOver(){
-     if(currentTetromino.some(index => squares[currentPosition + index + 40].classList.contains('taken'))){
-         displayScore.innerHTML = 'end';
-         clearInterval(timerId);
-         timerId = null;
-     }
+function gameOver() {
+//check the row under miniGrid (row 5 of the main grid) for any taken square
+    for (let i = 40; i <= 49; i++) {
+        if (squares[i].classList.contains('taken')) {
+            //  if(currentTetromino.some(index => squares[currentPosition + index + 10].classList.contains('taken'))){
+            displayScore.innerHTML = 'end';
+            clearInterval(timerId);
+            timerId = null;
+            undrawTetromino();
+        }
+    }
 }
 
 /*--------------------
