@@ -6,6 +6,8 @@ const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
 
+let gameSpeed = 1000; //initial speed of the game
+
 //it has to be an Array to be manipulated in addScore()
 let squares = Array.from(createGridDivs());
 
@@ -14,7 +16,7 @@ let topScore = 0;
 let level = 1;
 
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
-let timerId;
+let timerId; //will be set to move down the tetrominoes depending on the level
 setMiniGrid();
 
 /*--------------------
@@ -140,7 +142,6 @@ function undrawTetromino() {
         squares[currentPosition + index].classList.remove("tetromino");
     });
 }
-
 /**
  * Moves the current tetromino down on the grid by 1 row
  */
@@ -269,6 +270,9 @@ function rotate() {
     drawTetromino();
 }
 
+/**
+ * Rotate the tetromino anti clockwise
+ */
 function rotateAntiClockwise() {
     undrawTetromino();
     currentRotation--;
@@ -284,7 +288,8 @@ function rotateAntiClockwise() {
  * Removes full rows, add and display score, top score
  */
 function addScore() {
-    for (let i = 0; i < 199; i += width) {
+    for (let i = 0; i < squares.length; i += width) {
+        //define which are the squares of a row
         const row = [
             i,
             i + 1,
@@ -312,7 +317,8 @@ function addScore() {
 
             //remove the full rows and add the same number of rows at the top of the grid
             const removedSquares = squares.splice(i, width);
-            squares = removedSquares.concat(squares);
+            const first = squares.splice(0, 40);
+            squares = first.concat(removedSquares, squares);
             squares.forEach(square => gridContainer.appendChild(square));
         }
     }
@@ -344,23 +350,23 @@ function controls(event) {
         moveLeft();
     } else if (event.keyCode === 38) {
         rotate();
-    } else if(event.keyCode === 90){
+    } else if (event.keyCode === 90) {
         rotateAntiClockwise();
-    }else if (event.keyCode === 39) {
+    } else if (event.keyCode === 39) {
         moveRight();
     } else if (event.keyCode === 40) {
         moveDown();
     }
 }
 
-document.addEventListener("keyup", controls);
+    document.addEventListener("keyup", controls);
 
-playButton.addEventListener("click", () => {
-    if (timerId) {
-        clearInterval(timerId);
-        timerId = null;
-    } else {
-        drawTetromino();
-        timerId = setInterval(moveDown, 1000);
-    }
-});
+    playButton.addEventListener("click", () => {
+        if (timerId) {
+            clearInterval(timerId);
+            timerId = null;
+        } else {
+            drawTetromino();
+            timerId = setInterval(moveDown, 500);
+        }
+    });
