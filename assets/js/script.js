@@ -315,10 +315,10 @@ function addScore() {
                 squares[index].classList.remove("tetromino");
             });
 
-            //remove the full rows and add the same number of rows at the top of the grid
+            //remove the full rows and add the same number of rows under the mini grid
             const removedSquares = squares.splice(i, width);
-            const first = squares.splice(0, 40);
-            squares = first.concat(removedSquares, squares);
+            const firstFourRows = squares.splice(0, 40);
+            squares = firstFourRows.concat(removedSquares, squares);
             squares.forEach(square => gridContainer.appendChild(square));
         }
     }
