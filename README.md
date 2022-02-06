@@ -71,7 +71,10 @@ The live website can be found [here]().
         - If the playfield has not filled up with blocks, the next piece enters.
 
     -   #### List Of Rules
+        - A piece / shape / tetromino in Tetris is a geometric shape consisting of a set of blocks that is moved as a unit. A block (or mino) is the part of a piece that fills one unit of the playfield.
         - Playfield is 10 columns x 20 rows.
+        - Mini grid is 4 columns x 4 rows
+        - Next shape is displayed in the mini grid
         - Tetromino colors are as follows:
             - l shape - Cyan
             - o shape - Yellow
@@ -90,6 +93,8 @@ The live website can be found [here]().
             - Down Arrow - move the piece down faster
             - z - rotate piece 90deg anti clockwise
         - Use of half second lock delay
+        - Next shape is displayed immediately after the playing tetromino gets out of the top right corner mini grid
+        - When a row is fully covered / taken it must dissapear and score must be increased (line clear)
 
     -   #### Game Mechanics
         - ##### Rotation
@@ -103,6 +108,7 @@ The live website can be found [here]().
             - Moving down can be done faster manually by pressing the moving down key (Down Arrow)
             - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned
     -   #### Methods Of PLay
+        - Stack flat, but not too flat, to allow for S and Z tetrominoes. Having a flat field will allow a player to rotate less, which saves time. A player will also have more placement opportunities. The even field will allow a player to think less which results in faster reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground, lessening the risk of a block-out.
 
     -   #### Diagram Legend
 
