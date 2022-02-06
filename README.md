@@ -64,7 +64,7 @@ The live website can be found [here]().
         - The website will have two pages. The main page will display the Tetris game and the secondary page will be a 404 error page.
         - The largest part of the tetrion consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
         - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a given orientation and color depending on its shape. Part of the tetrion, called the piece preview, shows the next pieces that will enter the playfield.
-        - The player can rotate the falling tetromino ninety degrees at a time within the plane of the playfield by pressing the clockwise rotation button (Arrow Up) if the piece has room to rotate.
+        - The player can rotate the falling tetromino ninety degrees at a time within the plane of the playfield by pressing the clockwise rotation button (Arrow Up) or anti clockwise button (z) if the piece has room to rotate.
         - The player can shift the falling tetromino sideways one space at a time by pressing the left or right arrow. Pieces cannot shift through walls or other blocks.
         - Each tetromino moves downward slowly by itself. Generally a player can use some method to "drop" the tetromino, or make it move downward faster. Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in which time the player can move it. After locking, a player can no longer move the tetromino.
         - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
@@ -88,10 +88,20 @@ The live website can be found [here]().
             - Left Arrow - move the oiece to left one cell if no obstruction
             - Right Arrow - move the piece to right by one cell if no obstruction
             - Down Arrow - move the piece down faster
+            - z - rotate piece 90deg anti clockwise
         - Use of half second lock delay
 
     -   #### Game Mechanics
-
+        - ##### Rotation
+            - Initial rotation will be selected randomly for each spawned piece
+        - ##### Wall Kick
+            - A wall kick happens when a player rotates a piece when no space exists in the squares where that tetromino would normally occupy after the rotation.
+            To compensate,The game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left)
+        - ##### Movement
+            - The tetrominoes can move / slide towards left or right until they touch a side wall or another brick which occupies the square
+            - Moving down is done automatically by the game at a 1000ms initial speed which will get faster when the player level is going up
+            - Moving down can be done faster manually by pressing the moving down key (Down Arrow)
+            - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned
     -   #### Methods Of PLay
 
     -   #### Diagram Legend
