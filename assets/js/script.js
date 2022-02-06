@@ -112,6 +112,7 @@ function setMiniGrid() {
 
 let [currentTetromino, currentShape, currentRotation] = randomTetromino();
 let [nextTetromino, nextShape, nextRotation] = randomTetromino();
+
 /**
  * Returns a random Tetromino shape at a random rotation
  */
@@ -174,9 +175,9 @@ function moveDown() {
  */
 function displayNextShape() {
 
-    //when the current tetromino gets out of the mini grid generate the next shape
+    //When the current tetromino gets out of the mini grid generate the next shape
     if (currentPosition > 40 && currentPosition < 50) {
-        [nextTetromino, nextShape, nextRotation] = randomTetromino();
+        [nextTetromino, nextShape, nextRotation] = randomTetromino(); //generate new shape
         nextShapePosition = 6; //set spawn position
         drawNextTetromino(); //display the tetromino from the first row of the grid
     }
@@ -189,6 +190,8 @@ function displayNextShape() {
  */
 function freezeTetromino() {
     let freeze = false;
+
+    //Check if the tetromino is touching the bottom of the play field or another block
     if (currentTetromino.some(index =>
             (currentPosition + index + width > squares.length - 1) ||
             (squares[currentPosition + index + width].classList.contains("taken")))) {
@@ -212,7 +215,8 @@ function moveLeft() {
 
     const isAtLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0);
 
-    /*won't allow to move the piece left beyond miniGrid left boundary
+    /*
+    won't allow to move the piece left beyond miniGrid left boundary
     until the tetromino gets out on the play field
     */
     let miniGridTrue =
@@ -250,8 +254,10 @@ function moveRight() {
 }
 
 /*
-FIX rotation of the tetrominoes at the edge of the board
+FIX rotation of the tetrominoes at the edge of the board (they were going beyond the wall),
+the code was adjusted for the project needs
 credit: Ania Kubow (https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
+for isAtLeft(), isAtRight() and checkRotatedPosition(P) methods
 */
 /**
  * Check if the tetromino is at the right edge of the board
@@ -261,7 +267,7 @@ function isAtRight() {
 }
 
 /**
- * Check if the tetromino is at the leftt edge of the board
+ * Check if the tetromino is at the left edge of the board
  */
 function isAtLeft() {
     return currentTetromino.some(index => (currentPosition + index) % width === 0)
@@ -269,34 +275,78 @@ function isAtLeft() {
 
 /**
  * Check the position for next rotation of the shape at the edge of the board
- * before it is displayed in the new position
+ * and collision with other blocks
+ * before it is displayed in the new or same position position
  */
 function checkRotatedPosition(P) {
     P = P || currentPosition //get current position.  Then, check if the piece is near the left side.
     if ((P + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
         if (isAtRight()) { //use actual position to check if it's flipped over to right side
-            currentPosition += 1 //if so, add one to wrap it back around
-            checkRotatedPosition(P) //check again.  Pass position from start, since long block might need to move more.
+            currentPosition += 1; //if so, add one to wrap it back around
+
+            //reverse the position and rotation so the shape appears as not moved
+            if (isTaken()) {
+                currentPosition--;
+                currentRotation++;
+            }
+            checkRotatedPosition(P); //check again.  Pass position from start, since long block might need to move more.
         }
     } else if (P % width > 5) {
         if (isAtLeft()) {
-            currentPosition -= 1
-            checkRotatedPosition(P)
+            currentPosition -= 1;
+
+            //reverse the position and rotation so the shape appears as not moved
+            if (isTaken()) {
+                currentPosition++;
+                currentRotation--;
+            }
+            checkRotatedPosition(P);
         }
     }
 }
 
 
 /**
+ *  Limits the range of index to only to the size of the current tetromino rotation array
+ * when rotation happens clockwise or anti-clockwise (acts like an infinite loop)
+ */
+function adjustRotationLimits(direction) {
+    currentRotation += direction;
+    if (currentRotation === -1) {
+        currentRotation = currentTetromino.length - 1;
+    } else if (currentRotation === currentTetromino.length) {
+        currentRotation = 0;
+    }
+}
+
+/**
+ * Check if a square is taken so the current tetromino will not overlap it
+ */
+function isTaken(direction) {
+    let rotated = currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"));
+
+    if (rotated && direction === "clockwise") {
+        adjustRotationLimits(-1);
+    } else if (rotated && direction === "anti-clockwise") {
+        adjustRotationLimits(1);
+    }
+    currentTetromino = theTetrominoes[currentShape][currentRotation];
+
+    return rotated;
+}
+
+/**
  * Rotate the tetromino clockwise
  */
 function rotate() {
     undrawTetromino();
-    currentRotation++;
-    if (currentRotation === currentTetromino.length) {
-        currentRotation = 0;
-    }
+    let rightRotation = "clockwise";
+
+    adjustRotationLimits(1);
+
     currentTetromino = theTetrominoes[currentShape][currentRotation];
+    isTaken(rightRotation);
+
     checkRotatedPosition();
     drawTetromino();
 }
@@ -306,11 +356,13 @@ function rotate() {
  */
 function rotateAntiClockwise() {
     undrawTetromino();
-    currentRotation--;
-    if (currentRotation === -1) {
-        currentRotation = currentTetromino.length - 1;
-    }
+    let leftRotation = "anti-clockwise";
+
+    adjustRotationLimits(-1);
+
     currentTetromino = theTetrominoes[currentShape][currentRotation];
+    isTaken(leftRotation);
+
     checkRotatedPosition();
     drawTetromino();
 }
