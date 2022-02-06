@@ -101,14 +101,19 @@ The live website can be found [here]().
             - Initial rotation will be selected randomly for each spawned piece
         - ##### Wall Kick
             - A wall kick happens when a player rotates a piece when no space exists in the squares where that tetromino would normally occupy after the rotation.
-            To compensate,The game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left)
+            To compensate,The game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left).
         - ##### Movement
             - The tetrominoes can move / slide towards left or right until they touch a side wall or another brick which occupies the square
             - Moving down is done automatically by the game at a 1000ms initial speed which will get faster when the player level is going up
-            - Moving down can be done faster manually by pressing the moving down key (Down Arrow)
-            - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned
+            - Moving down can be done faster manually by pressing the moving down key (Down Arrow).
+            - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned.
     -   #### Methods Of PLay
         - Stack flat, but not too flat, to allow for S and Z tetrominoes. Having a flat field will allow a player to rotate less, which saves time. A player will also have more placement opportunities. The even field will allow a player to think less which results in faster reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground, lessening the risk of a block-out.
+        - Try not to build empty columns greater than 2 cells deep, as this will require an I tetromino that can be better used to tetris.
+        - Use a T to convert an S/Z field position into a Z/S.
+        - Avoid placing a J upright towards the left wall if you don't expect another J to appear soon. The same idea applies to L tetrominoes, either at a wall or at the edge
+        - When dealing with a two-deep hole, make room for both J and L instead of blocking one off.
+        - When having two open columns, deal with it as soon as possible. Over stacking will make things worse by having to wait on even more l shapes.
 
     -   #### Diagram Legend
 
