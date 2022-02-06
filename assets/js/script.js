@@ -16,6 +16,7 @@ let topScore = 0;
 let level = 1;
 
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
+let nextShapePosition = 6 //next shape position in the mini grid
 let timerId; //will be set to move down the tetrominoes depending on the level
 setMiniGrid();
 
@@ -110,6 +111,7 @@ function setMiniGrid() {
 }
 
 let [currentTetromino, currentShape, currentRotation] = randomTetromino();
+let [nextTetromino, nextShape, nextRotation] = randomTetromino();
 /**
  * Returns a random Tetromino shape at a random rotation
  */
@@ -135,6 +137,15 @@ function drawTetromino() {
 }
 
 /**
+ * Draw the next tetromino on the mini grid
+ */
+function drawNextTetromino() {
+    nextTetromino.forEach(index => {
+        squares[nextShapePosition + index].classList.add('tetromino');
+    })
+}
+
+/**
  * Undraw the current Tetromino from the grid
  */
 function undrawTetromino() {
@@ -147,12 +158,28 @@ function undrawTetromino() {
  */
 function moveDown() {
     undrawTetromino();
+
     if (!freezeTetromino()) {
         currentPosition += width;
     }
+
+    displayNextShape();
     drawTetromino();
     //gives the chance to move / slide the tetromino before it locks in place
     setTimeout(freezeTetromino, 500);
+}
+
+/**
+ * Display the next shape in the top right corner (mini grid)
+ */
+function displayNextShape() {
+
+    //when the current tetromino gets out of the mini grid generate the next shape
+    if (currentPosition > 40 && currentPosition < 50) {
+        [nextTetromino, nextShape, nextRotation] = randomTetromino();
+        nextShapePosition = 6; //set spawn position
+        drawNextTetromino(); //display the tetromino from the first row of the grid
+    }
 }
 
 /**
@@ -168,10 +195,9 @@ function freezeTetromino() {
         freeze = true;
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
 
-        //generate new tetromino
-        [currentTetromino, currentShape, currentRotation] = randomTetromino();
-        currentPosition = 6; //reset spawn position
-        drawTetromino(); //display the tetromino from the first row of the grid
+        //assign the next tetromino to the current tetromino
+        [currentTetromino, currentShape, currentRotation] = [nextTetromino, nextShape, nextRotation]
+        currentPosition = nextShapePosition;
         addScore();
         gameOver();
     }
@@ -189,11 +215,11 @@ function moveLeft() {
     /*won't allow to move the piece left beyond miniGrid left boundary
     until the tetromino gets out on the play field
     */
-    let miniGridTrue = 
+    let miniGridTrue =
         (currentPosition > 6 && currentPosition < 10 ||
-        currentPosition > 16 && currentPosition < 20 ||
-        currentPosition > 26 && currentPosition < 30 ||
-        currentPosition > 36) && !isAtLeftEdge;
+            currentPosition > 16 && currentPosition < 20 ||
+            currentPosition > 26 && currentPosition < 30 ||
+            currentPosition > 36) && !isAtLeftEdge;
 
     miniGridTrue ? currentPosition-- : false;
 
@@ -222,8 +248,6 @@ function moveRight() {
     }
     drawTetromino();
 }
-
-
 
 /*
 FIX rotation of the tetrominoes at the edge of the board
