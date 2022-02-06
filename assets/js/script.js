@@ -186,9 +186,16 @@ function moveLeft() {
 
     const isAtLeftEdge = currentTetromino.some(index => (currentPosition + index) % width === 0);
 
-    if (!isAtLeftEdge) {
-        currentPosition -= 1;
-    }
+    /*won't allow to move the piece left beyond miniGrid left boundary
+    until the tetromino gets out on the play field
+    */
+    let miniGridTrue = 
+        (currentPosition > 6 && currentPosition < 10 ||
+        currentPosition > 16 && currentPosition < 20 ||
+        currentPosition > 26 && currentPosition < 30 ||
+        currentPosition > 36) && !isAtLeftEdge;
+
+    miniGridTrue ? currentPosition-- : false;
 
     //if the left square is taken, move the tetromino back 1 square so it appears not moved
     if (currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"))) {
@@ -359,14 +366,14 @@ function controls(event) {
     }
 }
 
-    document.addEventListener("keyup", controls);
+document.addEventListener("keyup", controls);
 
-    playButton.addEventListener("click", () => {
-        if (timerId) {
-            clearInterval(timerId);
-            timerId = null;
-        } else {
-            drawTetromino();
-            timerId = setInterval(moveDown, 500);
-        }
-    });
+playButton.addEventListener("click", () => {
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+    } else {
+        drawTetromino();
+        timerId = setInterval(moveDown, 1000);
+    }
+});
