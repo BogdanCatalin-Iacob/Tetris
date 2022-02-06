@@ -246,6 +246,10 @@ Home Page<br>
 
 - Removing full rows to add score in addScore() function :
     - refactor variable square from const to let and assign an Array.from() grid childNodes to be able to slice() the full rows and add the same number of rows at the top of the grid so it won't appear smaller
+
+- When a tetromino was rotated between a wall and another block, it was kicked away from the wall but overlapped other block and locked in place:
+    - isTaken() function was implemented to check overlapping blocks when rotate
+    - also the same method was integrated into checkRotatedPosition() function to check overlapping blocks when tetrominoes hit the walls
 ***
 ## Deployment
 
