@@ -379,6 +379,7 @@ function rotateAntiClockwise() {
  * Removes full rows, add and display score, top score
  */
 function addScore() {
+    let clearedlines = 0;
     for (let i = 0; i < squares.length; i += width) {
         //define which are the squares of a row
         const row = [
@@ -394,12 +395,9 @@ function addScore() {
             i + 9
         ];
         if (row.every(index => squares[index].classList.contains('taken'))) {
-            //display score and top score
-            score += 10;
-            (topScore < score) ? topScore = score: topScore;
-            displayTopScore.innerHTML = topScore;
-            displayScore.innerHTML = score;
-
+            //count the cleared lines at once
+            clearedlines += 1;
+            
             //make each cell of the full row hidden and available
             row.forEach(index => {
                 squares[index].classList.remove('taken');
@@ -413,6 +411,29 @@ function addScore() {
             squares.forEach(square => gridContainer.appendChild(square));
         }
     }
+    //add score based on the player's level and cleared lines at simultaneously
+    switch (clearedlines) {
+        case 1:
+            score += level * 40;
+            break;
+        case 2:
+            score += level * 100;
+            break;
+        case 3:
+            score += level * 300;
+            break;
+        case 4:
+            score += level * 1200;
+            break;
+        default:
+            score += 0;
+            break;
+    }
+    //display scores
+    (topScore < score) ? topScore = score: topScore;
+    displayTopScore.innerHTML = topScore;
+    displayScore.innerHTML = score;
+    clearedlines = 0;// reset the number of cleared lines 
 }
 
 /**
