@@ -9,6 +9,11 @@
     * [General Information](#General-Information)
     * [List Of Rules](#list-of-rules)
     * [Game Mechanics](#Game-Mechanics)
+      * [Rotation](#rotation)
+      * [Wall Kick](#wall-kick)
+      * [Movement](#movement)
+      * [Scoring System](#scoring-system)
+      * [Leveling Up](#leveling-up)
     * [Methods Of Play](#Methods-Of-Play)
     * [Diagram Legend](#Diagram-Legend)
   * [Design](#Design)
@@ -99,6 +104,8 @@ The live website can be found [here]().
     -   #### Game Mechanics
         - ##### Rotation
             - Initial rotation will be selected randomly for each spawned piece
+            - If rotated tetromino overlaps another block, the rotation will be reverted so the shape appears not rotated
+            - If rotated tetromino goes beyond the bottom of the playfield, the rotation will be reverted so the shape appears not rotated
         - ##### Wall Kick
             - A wall kick happens when a player rotates a piece when no space exists in the squares where that tetromino would normally occupy after the rotation.
             To compensate,The game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left).
@@ -107,6 +114,25 @@ The live website can be found [here]().
             - Moving down is done automatically by the game at a 1000ms initial speed which will get faster when the player level is going up
             - Moving down can be done faster manually by pressing the moving down key (Down Arrow).
             - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned.
+
+        - ##### Scoring system
+            | Level | | | Points for| |
+            |:----:| :----:|:----:|:----:|:----:|
+            | | 1 line | 2 lines | 3 lines | 4Lines |
+            |1| 40 | 100 | 300 | 1200 |
+            |2| 80 | 200 | 600 | 2400 |
+            |3| 120 | 300 | 900 | 3600 |
+            |n| 40 * n | 100 * n | 300 * n | 1200 * n |
+
+        - ##### Leveling Up
+            - Player may only level up by clearing lines. Required lines depends on the level.
+            The variable goal is set to 5 times the level (5 * level).
+            - The lines values for variable goal are:
+                - single line = 1 line
+                - double lines = 3 line
+                - triple lines = 5 lines
+                - tetris (4 lines) = 8 lines 
+
     -   #### Methods Of PLay
         - Stack flat, but not too flat, to allow for S and Z tetrominoes. Having a flat field will allow a player to rotate less, which saves time. A player will also have more placement opportunities. The even field will allow a player to think less which results in faster reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground, lessening the risk of a block-out.
         - Try not to build empty columns greater than 2 cells deep, as this will require an I tetromino that can be better used to tetris.
