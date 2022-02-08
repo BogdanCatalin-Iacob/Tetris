@@ -14,6 +14,7 @@ let squares = Array.from(createGridDivs());
 let score = 0;
 let topScore = 0;
 let level = 1;
+let totalClearedLines = 0;
 
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
 let nextShapePosition = 6 //next shape position in the mini grid
@@ -397,7 +398,7 @@ function addScore() {
         if (row.every(index => squares[index].classList.contains('taken'))) {
             //count the cleared lines at once
             clearedlines += 1;
-            
+
             //make each cell of the full row hidden and available
             row.forEach(index => {
                 squares[index].classList.remove('taken');
@@ -433,7 +434,38 @@ function addScore() {
     (topScore < score) ? topScore = score: topScore;
     displayTopScore.innerHTML = topScore;
     displayScore.innerHTML = score;
-    clearedlines = 0;// reset the number of cleared lines 
+    levelUp(clearedlines);
+    clearedlines = 0; // reset the number of cleared lines 
+}
+
+/**
+ * Increase the level based on a variable cleared lines on each level
+ */
+function levelUp(clearedlines) {
+    //bonus for cleared lines at once
+    switch (clearedlines) {
+        case 1:
+            totalClearedLines += 1;
+            break;
+        case 2:
+            totalClearedLines += 3;
+            break;
+        case 3:
+            totalClearedLines += 5;
+            break;
+        case 4:
+            totalClearedLines += 8;
+            break;
+        default:
+            totalClearedLines += 0;
+            break;
+    }
+    //variable level up based on cleared lines and bonus
+    if (totalClearedLines >= (level * 5)) {
+        level++;
+        totalClearedLines = 0;
+    }
+    displayLevel.innerHTML = level;
 }
 
 /**
