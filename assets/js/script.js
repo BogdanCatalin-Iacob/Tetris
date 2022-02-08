@@ -320,19 +320,27 @@ function adjustRotationLimits(direction) {
 }
 
 /**
- * Check if a square is taken so the current tetromino will not overlap it
+ * Check if the next rotation is beyond the bottom of the playfield 
+ * or taken by other block so the tetromino will not get out of boundaries 
+ * or overlap other blocks
+ * 
  */
 function isTaken(direction) {
-    let rotated = currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"));
+    let rotated = false;
+    let bottom = currentTetromino.some(index => currentPosition + index > squares.length - 1);
 
-    if (rotated && direction === "clockwise") {
+    //check if the next rotation of the tetromino is beyond bottom of playfield
+    if (!bottom) {
+        rotated = currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"));
+    }
+    //if next rotation is beyond bottom or overlapping other block the rotation is reverted
+    if (bottom || rotated && direction === "clockwise") {
         adjustRotationLimits(-1);
-    } else if (rotated && direction === "anti-clockwise") {
+    } else if (bottom || rotated && direction === "anti-clockwise") {
         adjustRotationLimits(1);
     }
+    //set the shape accordingly
     currentTetromino = theTetrominoes[currentShape][currentRotation];
-
-    return rotated;
 }
 
 /**
