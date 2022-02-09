@@ -16,6 +16,17 @@ let topScore = 0;
 let level = 1;
 let totalClearedLines = 0;
 
+
+//colors list to be assigned to tetrominoes
+const colors= [
+    'orange',
+    'blue',
+    'green',
+    'red',
+    'purple',
+    'yellow',
+    'cyan'
+]
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
 let nextShapePosition = 6 //next shape position in the mini grid
 let timerId; //will be set to move down the tetrominoes depending on the level
@@ -135,6 +146,7 @@ FIX: Had to take out current tetromino from draw function due to randomly displa
 function drawTetromino() {
     currentTetromino.forEach(index => {
         squares[currentPosition + index].classList.add("tetromino");
+        squares[currentPosition + index].style.backgroundColor = colors[currentShape];
     });
 }
 
@@ -144,6 +156,7 @@ function drawTetromino() {
 function drawNextTetromino() {
     nextTetromino.forEach(index => {
         squares[nextShapePosition + index].classList.add('tetromino');
+        squares[nextShapePosition + index].style.backgroundColor = colors[nextShape];
     })
 }
 
@@ -153,6 +166,7 @@ function drawNextTetromino() {
 function undrawTetromino() {
     currentTetromino.forEach(index => {
         squares[currentPosition + index].classList.remove("tetromino");
+        squares[currentPosition + index].style.backgroundColor = "";
     });
 }
 /**
@@ -403,6 +417,7 @@ function addScore() {
             row.forEach(index => {
                 squares[index].classList.remove('taken');
                 squares[index].classList.remove("tetromino");
+                squares[currentPosition + index].style.backgroundColor = "";
             });
 
             //remove the full rows and add the same number of rows under the mini grid
