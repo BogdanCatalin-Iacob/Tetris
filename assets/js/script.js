@@ -18,7 +18,7 @@ let totalClearedLines = 0;
 
 
 //colors list to be assigned to tetrominoes
-const colors= [
+const colors = [
     'orange',
     'blue',
     'green',
@@ -183,6 +183,26 @@ function moveDown() {
     drawTetromino();
     //gives the chance to move / slide the tetromino before it locks in place
     setTimeout(freezeTetromino, 500);
+}
+
+/**
+ * Instant move down on the bottom of playfield or
+ * on top of another block if positioned under the playing tetromino
+ */
+function hardDrop() {
+    undrawTetromino();
+
+    for (let i = currentPosition; i < squares.length - 1; i += width) {
+        if (currentTetromino.some(index =>
+                (i + index + width > squares.length - 1) ||
+                (squares[i + index + width].classList.contains("taken")))) {
+            currentPosition = i;
+            console.log(currentPosition);
+            break;
+        }
+    }
+    drawTetromino();
+    freezeTetromino();
 }
 
 /**
@@ -515,6 +535,8 @@ function controls(event) {
         moveRight();
     } else if (event.keyCode === 40) {
         moveDown();
+    } else if (event.keyCode === 32) {
+        hardDrop();
     }
 }
 
