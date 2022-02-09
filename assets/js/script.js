@@ -417,7 +417,7 @@ function addScore() {
             row.forEach(index => {
                 squares[index].classList.remove('taken');
                 squares[index].classList.remove("tetromino");
-                squares[currentPosition + index].style.backgroundColor = "";
+                squares[index].style.backgroundColor = "";
             });
 
             //remove the full rows and add the same number of rows under the mini grid
