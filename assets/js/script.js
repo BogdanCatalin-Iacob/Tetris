@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+    saveTopScore();
+});
+
 const width = 10; //number of squares on a row
 const displayTopScore = document.getElementById("top-score");
 const displayScore = document.getElementById("score");
@@ -8,14 +12,12 @@ const gridContainer = document.getElementById("grid-container");
 
 let gameSpeed = 1000; //initial speed of the game
 
-//it has to be an Array to be manipulated in addScore()
+//it has to be an Array to be manipulated
 let squares = Array.from(createGridDivs());
 
 let score = 0;
-let topScore = 0;
 let level = 1;
 let totalClearedLines = 0;
-
 
 //colors list to be assigned to tetrominoes
 const colors = [
@@ -27,6 +29,7 @@ const colors = [
     'yellow',
     'cyan'
 ]
+
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
 let nextShapePosition = 6 //next shape position in the mini grid
 let timerId; //will be set to move down the tetrominoes depending on the level
@@ -197,7 +200,6 @@ function hardDrop() {
                 (i + index + width > squares.length - 1) ||
                 (squares[i + index + width].classList.contains("taken")))) {
             currentPosition = i;
-            console.log(currentPosition);
             break;
         }
     }
@@ -340,7 +342,6 @@ function checkRotatedPosition(P) {
     }
 }
 
-
 /**
  *  Limits the range of index to only to the size of the current tetromino rotation array
  * when rotation happens clockwise or anti-clockwise (acts like an infinite loop)
@@ -358,7 +359,6 @@ function adjustRotationLimits(direction) {
  * Check if the next rotation is beyond the bottom of the playfield 
  * or taken by other block so the tetromino will not get out of boundaries 
  * or overlap other blocks
- * 
  */
 function isTaken(direction) {
     let rotated = false;
@@ -416,6 +416,7 @@ function rotateAntiClockwise() {
 function addScore() {
     let clearedlines = 0;
     for (let i = 0; i < squares.length; i += width) {
+
         //define which are the squares of a row
         const row = [
             i,
@@ -447,6 +448,7 @@ function addScore() {
             squares.forEach(square => gridContainer.appendChild(square));
         }
     }
+
     //add score based on the player's level and cleared lines at simultaneously
     switch (clearedlines) {
         case 1:
@@ -466,11 +468,27 @@ function addScore() {
             break;
     }
     //display scores
-    (topScore < score) ? topScore = score: topScore;
-    displayTopScore.innerHTML = topScore;
+    saveTopScore(score);
     displayScore.innerHTML = score;
     levelUp(clearedlines);
     clearedlines = 0; // reset the number of cleared lines 
+}
+
+/**
+ * Save, update and display top score value saved on local storage
+ */
+function saveTopScore(score) {
+    let savedTopScore = window.localStorage.getItem('topScore'); //get top score saved on local storage
+
+    if (savedTopScore === null) {
+        savedTopScore = 0;
+    } else {
+        savedTopScore < score ? savedTopScore = score : savedTopScore;
+    }
+
+    window.localStorage.setItem('topScore', savedTopScore);
+
+    displayTopScore.innerHTML = savedTopScore;
 }
 
 /**
@@ -495,6 +513,7 @@ function levelUp(clearedlines) {
             totalClearedLines += 0;
             break;
     }
+
     //variable level up based on cleared lines and bonus
     if (totalClearedLines >= (level * 5)) {
         level++;
