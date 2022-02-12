@@ -58,10 +58,11 @@ The live website can be found [here]().
         2. I want to find the game instructions easily
 
     -   #### Returning Visitor Goals
-        1. I want my high score to be saved for next time I play
+        1. I want to know what is the highest score
 
     -   #### Frequent User Goals
-        1. 
+        1. I want to be able to fast drop the pieces
+        1. I want increased difficulty with each level
 
 -   ### Structure
 
