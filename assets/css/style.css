@@ -49,16 +49,21 @@ button:active{
     margin: auto;
     justify-content: center;
     position: relative;
+    border: 1rem ridge #ccc;
+    border-radius: 20px;
 }
 
 #stats {
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-evenly;
     width: 60%;
     height: 16.5%;
     background-color: #fff;
+    text-align: center;
 }
-
-
+    
 #grid-container {
     margin: auto;
     display: grid;
