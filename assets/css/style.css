@@ -51,6 +51,7 @@ button:active{
     position: relative;
     border: 1rem ridge #ccc;
     border-radius: 20px;
+    background-color: #000;
 }
 
 #stats {
@@ -73,7 +74,7 @@ button:active{
 }
 
 .square {
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
     background-color: #444;
     aspect-ratio: 1/1;
 }
@@ -83,12 +84,14 @@ button:active{
 }
 
 .tetromino {
-    background-color: red;
+    border: 1.5px solid #fff;
+    border-radius: 10%;
 }
 
 .taken {
-    background-color: green !important;
+    opacity: 0.85;
 }
+
 
 /*--------------------
 |      Media query    |
