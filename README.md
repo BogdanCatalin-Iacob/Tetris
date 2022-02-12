@@ -77,7 +77,8 @@ The live website can be found [here]().
 
     -   #### List Of Rules
         - A piece / shape / tetromino in Tetris is a geometric shape consisting of a set of blocks that is moved as a unit. A block (or mino) is the part of a piece that fills one unit of the playfield.
-        - Playfield is 10 columns x 20 rows.
+        - Playfield is 10 columns x 24 rows.
+        - First 4 row are not part of the playing field, they are reserved for minigrid
         - Mini grid is 4 columns x 4 rows
         - Next shape is displayed in the mini grid
         - Tetromino colors are as follows:
@@ -97,22 +98,26 @@ The live website can be found [here]().
             - Right Arrow - move the piece to right by one cell if no obstruction
             - Down Arrow - move the piece down faster
             - z - rotate piece 90deg anti clockwise
+            - space bar - hard drop
         - Use of half second lock delay
-        - Next shape is displayed immediately after the playing tetromino gets out of the top right corner mini grid
+        - Next shape is displayed immediately after the playing tetromino gets out of the top right corner (mini grid)
         - When a row is fully covered / taken it must dissapear and score must be increased (line clear)
+        - Top Score will be saved on local storage
 
     -   #### Game Mechanics
         - ##### Rotation
             - Initial rotation will be selected randomly for each spawned piece
-            - If rotated tetromino overlaps another block, the rotation will be reverted so the shape appears not rotated
-            - If rotated tetromino goes beyond the bottom of the playfield, the rotation will be reverted so the shape appears not rotated
+            - Tetrominoes can be rotated clockwise or anti-clockwise
+            - If the rotated tetromino overlaps another block, the rotation will be reverted so the shape appears not rotated
+            - If the rotated tetromino goes beyond the bottom of the playfield, the rotation will be reverted so the shape appears not rotated
         - ##### Wall Kick
             - A wall kick happens when a player rotates a piece when no space exists in the squares where that tetromino would normally occupy after the rotation.
-            To compensate,The game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left).
+            To compensate, the game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left).
         - ##### Movement
             - The tetrominoes can move / slide towards left or right until they touch a side wall or another brick which occupies the square
             - Moving down is done automatically by the game at a 1000ms initial speed which will get faster when the player level is going up
             - Moving down can be done faster manually by pressing the moving down key (Down Arrow).
+            - Hard drop (space bar key) of tetrominoes instant places the shape at the bottom of the playfield (if free) or on top of other blocks (if present) 
             - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned.
 
         - ##### Scoring system
@@ -134,7 +139,7 @@ The live website can be found [here]().
                 - tetris (4 lines) = 8 lines 
 
     -   #### Methods Of PLay
-        - Stack flat, but not too flat, to allow for S and Z tetrominoes. Having a flat field will allow a player to rotate less, which saves time. A player will also have more placement opportunities. The even field will allow a player to think less which results in faster reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground, lessening the risk of a block-out.
+        - Stack flat, but not too flat, to allow S and Z tetrominoes to stack without creating gaps. Having a flat field will allow a player to rotate less, which saves time. A player will also have more placement opportunities. The even field will allow a player to think less which results in faster reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground, lessening the risk of a block-out.
         - Try not to build empty columns greater than 2 cells deep, as this will require an I tetromino that can be better used to tetris.
         - Use a T to convert an S/Z field position into a Z/S.
         - Avoid placing a J upright towards the left wall if you don't expect another J to appear soon. The same idea applies to L tetrominoes, either at a wall or at the edge
