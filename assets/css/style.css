@@ -11,11 +11,32 @@
 header{
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
 }
 
 h1{
     text-align: center;
+}
+
+/*--------------------
+|        Buttons      |
+ --------------------*/
+button{
+    background-color: #fff;
+    width: 5em;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+button:hover{
+    background-color: #ccc;
+}
+
+button:active{
+    background-color: #8f8;
+    transform: translateY(2px);
 }
 
 
