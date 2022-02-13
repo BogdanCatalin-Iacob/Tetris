@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     saveTopScore();
+    openModal();
 });
 
 const width = 10; //number of squares on a row
@@ -9,6 +10,7 @@ const displayLevel = document.getElementById("level");
 const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
+const modal = document.getElementById("modal");
 
 let gameSpeed = 1000; //initial speed of the game
 
@@ -93,6 +95,19 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 /*--------------------
 |      Functions      |
  --------------------*/
+/**
+ * Open intruction modal when the DOM is loaded
+ */
+function openModal() {
+    modal.style.display = "block";
+}
+
+/**
+ * Close the intruction modal
+ */
+function closeModal() {
+    modal.style.display = "none";
+}
 
 /**
  * Create 200 divs for the grid layout and return an array of divs
@@ -101,7 +116,7 @@ function createGridDivs() {
     for (let i = 0; i < 240; i++) {
         gridContainer.innerHTML += `<div class="square"></div>`
     }
-    return gridContainer.childNodes;;
+    return gridContainer.childNodes;
 }
 
 /**
