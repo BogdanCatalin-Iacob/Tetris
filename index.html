@@ -25,28 +25,33 @@
     </header>
 
     <main>
+        <!-- .modal-window start-->
         <div id="modal" class="modal-window">
             <div id="intructions">
-                    <h1>Instructions!
-                        <br>
-                    </h1>
-                    <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>
+                <h1>Instructions!
+                    <br>
+                </h1>
+                <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>
+                <img id="keyboard-controls" src="assets/images/keyboard-layout.PNG"
+                    alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
+                up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume" width=100% />
 
-                    <button>Play</button>
+                <button id="modal-play">Play</button>
             </div>
         </div><!-- .modal-window end-->
 
+        <!-- game area start-->
         <div id="game-area">
             <div id="stats">
                 <h3>Top Score: <span id="top-score">0</span></h3>
                 <h3>Score: <span id="score">0</span></h3>
                 <h3>Level: <span id="level">1</span></h3>
             </div>
-            <div id="grid-container"></div>
+            <div id="grid-container"></div><!-- playfield where tetrominoes can be stacked-->
         </div>
+        <!-- game area start-->
 
     </main>
-
 
     <script src="assets/js/script.js"></script>
 </body>
