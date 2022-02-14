@@ -190,7 +190,14 @@ Home Page<br>
 ## Features
  
 -   ### Existing Features
-- 
+    - Initial modal with intructions and Play button
+    - Game Over modal
+    - Play / Pause button
+    - Sounds button
+    - Next shape display
+    - Top score display
+    - Actual score display
+    - Level display
 
 - Error page (404) to redirect the user back to home page<br>
     ![error-page](/assets/images/Features-images/)<br>
@@ -199,7 +206,7 @@ Home Page<br>
     ![browser-tab-icon](/assets/images/Features-images/)<br>
 
 -   ### Features Left to Implement
-    - 
+    - Ghost piece
 
 ***
 
@@ -209,6 +216,8 @@ Home Page<br>
 	* This project uses HTML as the main language used to complete the structure of the Website.
 * CSS
 	* This project uses custom written CSS to style the Website.
+* JavaScript
+    * This project is interactive with the help of JavaScript
 * [Font Awesome](https://fontawesome.com/)
 	* Font awesome Icons are used for the Social media links contained in the Footer section of the website and for the benefits found on the index.html page.
 * [Google Fonts](https://fonts.google.com/)
@@ -245,7 +254,19 @@ Home Page<br>
         - shapes hit left wall
         - shapes hit right wall
         - shapes hit another shape
+        - clocwise rotate
+        - anti-clockwise rotate
         - shapes hit walls or another shapes when rotate
+        - shape soft drop
+        - shape hard drop
+        - play / pause
+        - modal pop-up
+        - modal play button
+        - game over modal pop-up
+        - score adding up and display
+        - top score saved on local storage display
+        - top score update
+        - level update
 
     -   ### Test Results
 
