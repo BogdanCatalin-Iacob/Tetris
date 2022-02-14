@@ -11,6 +11,7 @@ const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
 const gridContainer = document.getElementById("grid-container");
 const modal = document.getElementById("modal");
+const modalPlay = document.getElementById("modal-play");
 
 let gameSpeed = 1000; //initial speed of the game
 
@@ -559,8 +560,22 @@ function gameOver() {
             openModal();
         }
     }
+}
 
-
+/**
+ * Start or pause the game
+ */
+function playPause() {
+    closeModal();
+    if (timerId) {
+        clearInterval(timerId);
+        timerId = null;
+        playButton.innerHTML = "Play";
+    } else {
+        drawTetromino();
+        timerId = setInterval(moveDown, 1000);
+        playButton.innerHTML = "Pause";
+    }
 }
 
 /*--------------------
@@ -587,12 +602,6 @@ function controls(event) {
 
 document.addEventListener("keyup", controls);
 
-playButton.addEventListener("click", () => {
-    if (timerId) {
-        clearInterval(timerId);
-        timerId = null;
-    } else {
-        drawTetromino();
-        timerId = setInterval(moveDown, 1000);
-    }
-});
+playButton.addEventListener("click", playPause);
+
+modalPlay.addEventListener("click", playPause);
