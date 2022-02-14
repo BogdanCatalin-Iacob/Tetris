@@ -111,10 +111,12 @@ button:active{
     transition: all 0.3s;
   }
   
-  .modal-window h1 {
+  .modal-window h1,
+  .modal-window h2 {
     font-size: 1.5rem;
     color: #fffafa;
     margin: 0 0 15px;
+    text-align: center;
   }
   
   .modal-close {
