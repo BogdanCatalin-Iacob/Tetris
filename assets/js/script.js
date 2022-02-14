@@ -541,15 +541,26 @@ function levelUp(clearedlines) {
  * When the tetrominoes touch the top of the game board the game ends
  */
 function gameOver() {
+    let modalBox = document.getElementById("intructions");
+
     //check the row under miniGrid (row 5 of the main grid) for any taken square
     for (let i = 40; i <= 49; i++) {
         if (squares[i].classList.contains('taken')) {
-            displayScore.innerHTML = 'end';
+            // displayScore.innerHTML = 'end';
             clearInterval(timerId);
             timerId = null;
             undrawTetromino();
+
+            //set Game over message in the modal box and display the score
+            modalBox.innerHTML = `<h1>GAME OVER!<br></h1>
+                                <h2>Your score: ${score}</h2>
+                                <h2>Level: ${level}</h2>
+                                <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>`;
+            openModal();
         }
     }
+
+
 }
 
 /*--------------------
