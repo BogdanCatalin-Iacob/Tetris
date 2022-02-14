@@ -141,6 +141,7 @@ function setMiniGrid() {
     }
 }
 
+//assign the values of a random tetromino
 let [currentTetromino, currentShape, currentRotation] = randomTetromino();
 let [nextTetromino, nextShape, nextRotation] = randomTetromino();
 
@@ -571,6 +572,10 @@ function playPause() {
         clearInterval(timerId);
         timerId = null;
         playButton.innerHTML = "Play";
+        document.getElementById("intructions").innerHTML = `<h1>Paused</h1>
+                                                            <br>
+                                                            <h2>Press Esc to resume</h2`;
+        openModal();
     } else {
         drawTetromino();
         timerId = setInterval(moveDown, 1000);
@@ -597,6 +602,8 @@ function controls(event) {
         moveDown();
     } else if (event.keyCode === 32) {
         hardDrop();
+    }else if(event.keyCode === 27){
+        playPause();
     }
 }
 
