@@ -250,25 +250,108 @@ Home Page<br>
 
     -   #### Summary 
 
+        - random shape
+        - clocwise rotate and anti-clockwise rotate
         - shapes hit the floor
-        - shapes hit left wall
-        - shapes hit right wall
+        - shapes hit left or right wall
         - shapes hit another shape
-        - clocwise rotate
-        - anti-clockwise rotate
-        - shapes hit walls or another shapes when rotate
-        - shape soft drop
-        - shape hard drop
+        - shape soft drop and hard drop
+        - shape colors 
+        - next shape display
         - play / pause
+        - sound
         - modal pop-up
-        - modal play button
-        - game over modal pop-up
         - score adding up and display
-        - top score saved on local storage display
-        - top score update
+        - top score
         - level update
+        - game speed
+        - lock in place delay
+        - game over
+        
+
 
     -   ### Test Results
+
+        - #### Random shapes
+            - each time the game starts a random shape must be selected - > work as expected
+            - each new tetromino must be selected randomly -> work as expected
+
+        - #### Clockwise and Anti-Clockwise rotate 
+            - rotation must display the shape in the next logical position by pressing:
+                - Up Arrow key for clockwise rotation
+                - Z key for Anti-Clockwise rotation 
+            - if the next rotated position is getting the shape over the walls /floor limit or overlap another shape it will be reverted and the shape appears in the previous rotation
+            -  work as expected
+
+        - #### Shape hit the floor
+            - if the shape touches the floor it must stop at that level (not passing through) -> work as expected
+
+        - #### Shape hit the left or right wall
+            - if the shape touches the left or right wall with any of the sides it must not go through and continue normal moving down
+                - Left Arrow key for sliding left
+                - Right Arrow key for sliding right 
+            - work as expected
+
+        - #### Shape hit the another shape
+            - if the shape touches another shape with any of the sides it must stop without overlapping -> work as expected
+
+        - #### Shape soft drop and hard drop
+            - faster down movement can be done by pressing Down Arrow Key -> work as expected
+            - instant drop can be done by pressing Spacebar key - it will place the shape on the last available free space and lock it in place with no delay -> work as expected
+            
+        - #### Shape color
+            - each shape must have its own color (as described in [list of rules](#list-of-rules)) and keep it throughout the game -> work as expected
+            - after locked in place the shapes will have a decreased opacity to differentiate from playing shape -> work as expected
+
+        - #### Next shape display
+            - next shape is selected randomly and displayed in the top right corner minigrid after the previous shape is out in the playing field -> work as expected
+            - next shape color must follow the same color code as playing shape -> work as expected 
+
+        - #### Play / Pause
+            - when button text display "Play" if pressed the game is starting or resume after pause-> work as expected
+            - when button text display "Pause" if pressed the game will be paused - work as expected
+
+        - #### Sound
+
+        - #### Modal pop-up
+            - start-up modal  displays game instructions -> work as expected
+                - "Play" button will close the modal and start the game -> work as expected
+                - "Close" button will close the modal, but will not start the game -> work as expected
+
+        - #### Score adding up and display
+            - each time the player clears lines variable points will be awarded based on [scoring system](#scoring-system) -> work as expected
+            - the current game score (real time update) is diplayed in the left top corner -> work as expected
+
+        - #### Top score
+            - top score is saved on local storage and returned every time the game starts ->work as expected
+            - top score will be updated in real time if the saved top score is smaller than the current game score -> work as expected
+
+        - #### Level Update
+            - level must increase by 1 each time the player clears a specific number of line equal to (Level * 5) -> work as expected
+            - number of cleared lines at once determine variable bonus lines counted for leveling up 
+                1. 1 line = 1 line
+                1. 2 lines = 3 lines
+                1. 3 lines = 5 lines
+                1. 4 lines = 8 lines
+                - this works as expected
+            - every time level is increased the game speed is getting faster by 1% -> work as expected
+            - every time level is increased the tetromino lock delay decreases by 1% -> work as expected
+            - level is displayed in the top left corner
+
+        - #### Game speed
+            - initial speed of moving down (by default) a tetromino is 1000ms.
+            - game speed is increased (the timer decreased) by 1% for each level completion -> work as expected
+
+        - #### Lock in place delay
+            - initial delay before a tetromino is locked in place is 500ms.
+            - lock delay is decreased by 1% for each level completion -> work as expected
+
+        - #### Game over
+            - if a shape is locked in place at the top (first row) of the playfield a modal will pop-up displaying "Game Over", the score and the level of the current game -> work as expected
+
+      
+
+     
 
     - All Pages were run through the [W3C HTML Validator](https://validator.w3.org/) and showed no errors.<br>
     ![html-validation](/assets/images/HTML-CSS-Validators/html-validation-1.JPG)<br>
