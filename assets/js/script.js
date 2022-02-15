@@ -14,6 +14,7 @@ const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
 let gameSpeed = 1000; //initial speed of the game
+let lockDelay = 500; //initial delay before a tetromino is locked in place
 
 //it has to be an Array to be manipulated
 let squares = Array.from(createGridDivs());
@@ -202,7 +203,7 @@ function moveDown() {
     displayNextShape();
     drawTetromino();
     //gives the chance to move / slide the tetromino before it locks in place
-    setTimeout(freezeTetromino, 500);
+    setTimeout(freezeTetromino, lockDelay);
 }
 
 /**
@@ -534,6 +535,8 @@ function levelUp(clearedlines) {
     //variable level up based on cleared lines and bonus
     if (totalClearedLines >= (level * 5)) {
         level++;
+        gameSpeed > 0 ? gameSpeed -= (gameSpeed * (1 / 100)) : gameSpeed = 1; //speed upo the game by 1%
+        lockDelay > 0 ? lockDelay -= (lockDelay * (1 / 100)) : lockDelay = 1; //shorten the lock in place time by 1%
         totalClearedLines = 0;
     }
     displayLevel.innerHTML = level;
