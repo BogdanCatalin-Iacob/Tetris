@@ -535,7 +535,7 @@ function levelUp(clearedlines) {
     //variable level up based on cleared lines and bonus
     if (totalClearedLines >= (level * 5)) {
         level++;
-        gameSpeed > 0 ? gameSpeed -= (gameSpeed * (1 / 100)) : gameSpeed = 1; //speed upo the game by 1%
+        gameSpeed > 0 ? gameSpeed -= (gameSpeed * (1 / 100)) : gameSpeed = 1; //speed up the game by 1%
         lockDelay > 0 ? lockDelay -= (lockDelay * (1 / 100)) : lockDelay = 1; //shorten the lock in place time by 1%
         totalClearedLines = 0;
     }
@@ -605,7 +605,7 @@ function controls(event) {
         moveDown();
     } else if (event.keyCode === 32) {
         hardDrop();
-    }else if(event.keyCode === 27){
+    } else if (event.keyCode === 27) {
         playPause();
     }
 }
