@@ -185,6 +185,7 @@ Home Page<br>
 ![Home Page Wireframe](/assets/images/Wireframes/)<br>
 
 -   ### Limitations
+    - Top score is saved on local storage due to no database
 
 ***
 ## Features
@@ -198,6 +199,9 @@ Home Page<br>
     - Top score display
     - Actual score display
     - Level display
+    - Rotation system
+    - Collision detection
+    - Keyboard controls
 
 - Error page (404) to redirect the user back to home page<br>
     ![error-page](/assets/images/Features-images/)<br>
@@ -207,6 +211,7 @@ Home Page<br>
 
 -   ### Features Left to Implement
     - Ghost piece
+    - Save name, level, top score on cloud
 
 ***
 
