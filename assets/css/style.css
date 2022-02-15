@@ -118,6 +118,10 @@ button:active{
     margin: 0 0 15px;
     text-align: center;
   }
+
+  .modal-window p{
+      color: #fffafa;
+  }
   
   .modal-close {
     color: #aaa;
@@ -145,8 +149,6 @@ button:active{
     margin: auto;
     transform: translate(-50%, -50%);
   }
-  /* modal content -- end*/
-
 
 /*--------------------
 |      Media query    |
