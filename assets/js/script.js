@@ -212,17 +212,17 @@ function moveDown() {
  */
 function hardDrop() {
     undrawTetromino();
-//check each row from the current possition downwards for empty space 
+    //check each row from the current possition downwards for empty space 
     for (let i = currentPosition; i < squares.length - 1; i += width) {
-     if(currentPosition < 40){
-         currentPosition = 41;//must be over 40 for displayNextShape() to work
-         displayNextShape();
-     }
-     
-     /*
-     if the next row has filled in spaces at the same column as any of the current tetromino or
-     iteration got to the bottom of the playfield place the tetromino accordingly skipping step by step moving down
-     */
+        if (currentPosition < 40) {
+            currentPosition = 41; //must be over 40 for displayNextShape() to work
+            displayNextShape();
+        }
+
+        /*
+        if the next row has filled in spaces at the same column as any of the current tetromino or
+        iteration got to the bottom of the playfield place the tetromino accordingly skipping step by step moving down
+        */
         if (currentTetromino.some(index =>
                 (i + index + width > squares.length - 1) ||
                 (squares[i + index + width].classList.contains("taken")))) {
@@ -576,7 +576,8 @@ function gameOver() {
 }
 
 /**
- * Start or pause the game
+ * Start or pause the game.
+ * When paused a modal will pop-up which contains a resume button
  */
 function playPause() {
     closeModal();
@@ -586,7 +587,9 @@ function playPause() {
         playButton.innerHTML = "Play";
         document.getElementById("intructions").innerHTML = `<h1>Paused</h1>
                                                             <br>
-                                                            <h2>Press Esc to resume</h2`;
+                                                            <div class="center">
+                                                                <button class="button modal-button" onclick="playPause()">Resume</button>
+                                                            </div>`;
         openModal();
     } else {
         drawTetromino();
