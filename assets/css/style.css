@@ -39,6 +39,20 @@ button:active{
     transform: translateY(2px);
 }
 
+.center{
+    display: flex;
+    justify-content: center;
+}
+
+.modal-button{
+width: 10em;
+height: 5em;
+border: 3px solid #8f8;
+border-style: outset;
+border-radius: 20%;
+font-size: 1.2rem;
+}
+
 
 /*--------------------
 |      Game Board     |
