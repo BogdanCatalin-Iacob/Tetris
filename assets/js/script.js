@@ -9,6 +9,7 @@ const displayScore = document.getElementById("score");
 const displayLevel = document.getElementById("level");
 const playButton = document.getElementById("play-button");
 const soundsButton = document.getElementById("sounds-button");
+const instructionsButton = document.getElementById("instructions-button");
 const gridContainer = document.getElementById("grid-container");
 const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
@@ -598,6 +599,36 @@ function playPause() {
     }
 }
 
+/**
+ * display a modal with a set of how to play instructions
+ */
+function instructions() {
+    document.getElementById("intructions").innerHTML = `
+        <h1>Instructions!</h1>
+                <br>
+        <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>
+        
+        <p>- Stack flat, but not too flat, to allow S and Z tetrominoes to stack without creating gaps. Having a
+            flat field will allow a player to rotate less, which saves time. A player will also have more
+            placement opportunities. The even field will allow a player to think less which results in faster
+             reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground,
+             lessening the risk of a block-out.</p>
+        <p>- Try not to build empty columns greater than 2 cells deep, as this will require an I tetromino that
+            can be better used to tetris.</p>
+        <p>- Use a T to convert an S/Z field position into a Z/S.</p>
+        <p>- Avoid placing a J upright towards the left wall if you don't expect another J to appear soon. The
+            same idea applies to L tetrominoes, either at a wall or at the edge</p>
+        <p>- When dealing with a two-deep hole, make room for both J and L instead of blocking one off.</p>
+        <p>- When having two open columns, deal with it as soon as possible. Over stacking will make things
+            worse by having to wait on even more l shapes.</p>
+
+        <img id="keyboard-controls" src="assets/images/keyboard-layout.PNG"
+            alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
+        up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume" width=100% />`;
+
+    openModal();
+}
+
 /*--------------------
 |   Event Listener    |
  --------------------*/
@@ -625,5 +656,7 @@ function controls(event) {
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", playPause);
+
+instructionsButton.addEventListener("click", instructions);
 
 modalPlay.addEventListener("click", playPause);
