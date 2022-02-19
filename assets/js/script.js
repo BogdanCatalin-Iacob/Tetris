@@ -14,6 +14,11 @@ const gridContainer = document.getElementById("grid-container");
 const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
+let startTouchX;
+let startTouchY;
+let tapTimeOut;
+let isTaplength;
+
 let gameSpeed = 1000; //initial speed of the game
 let lockDelay = 500; //initial delay before a tetromino is locked in place
 
@@ -653,6 +658,74 @@ function controls(event) {
     }
 }
 
+// function handleEvent(event) {
+//     event.preventDefault();
+//     let initialPosition = event.clientX;
+//     if (event.type === 'mousemove') {
+//         let mousePosition = '(' + event.clientX + ',' + event.clientY + ')';
+//         displayLevel.innerHTML = mousePosition;
+//     }
+
+//     if(event.clientX > initialPosition){
+//         moveRight();
+//     }
+//         console.log("initial position: " + initialPosition);
+
+// }
+
+/**
+ * Register initial touch point to determine movement direction
+ * and set a timeout used for tap detection
+ */
+function handleTouchStart(event) {
+    event.preventDefault();
+    startTouchX = event.touches[0].clientX;
+    startTouchY = event.touches[0].clientY;
+    isTaplength = true;
+    if (tapTimeOut) {
+        clearTimeout(tapTimeOut);
+    }
+    tapTimeOut = setTimeout(() => {
+        isTaplength = false
+    }, 200);
+}
+
+/**
+ * Move the tetrominoes left, right or down when swipe (use on touch screen devices)
+ */
+function handleTouchMove(event) {
+    event.preventDefault();
+    let touchMoveX = event.touches[0].clientX;
+    let touchMoveY = event.touches[0].clientY;
+
+    //allows a longer swipe distance with for less travelling distance when divided by 10px
+    if (touchMoveX % 10 === 0) {
+        touchMoveX < startTouchX ? moveLeft() : moveRight();
+    }
+
+    //allows a longer swipe distance with for less travelling distance when divided by 10px
+    if (touchMoveY % 10 === 0) {
+        if (touchMoveY > startTouchY) {
+            moveDown();
+        }
+    }
+}
+
+/**
+ * Handle the tap event. If the touch is less than 200ms,
+ * start touch and end touch are approximately equal(less than 50px between them)
+ * a single clockwise rotation will happen (use on touch screen devices)
+ */
+function handleTouchEnd(event) {
+    event.preventDefault();
+    let endTouchX = event.changedTouches[0].clientX;
+    let endTouchY = event.changedTouches[0].clientY;
+
+    if (isTaplength && ((endTouchX - startTouchX) < 50 || (endTouchY - startTouchY) < 50)) {
+        rotate();
+    }
+}
+
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", playPause);
@@ -660,3 +733,10 @@ playButton.addEventListener("click", playPause);
 instructionsButton.addEventListener("click", instructions);
 
 modalPlay.addEventListener("click", playPause);
+
+// gridContainer.addEventListener("mousemove", );
+
+//touch controls events
+gridContainer.addEventListener("touchstart", handleTouchStart);
+gridContainer.addEventListener("touchmove", handleTouchMove);
+gridContainer.addEventListener("touchend", handleTouchEnd);
