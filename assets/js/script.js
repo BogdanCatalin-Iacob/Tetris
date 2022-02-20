@@ -682,6 +682,7 @@ function handleEvent(event) {
                 } else {
                     moveLeft();
                 }
+                freezeTetromino();
             }
             initialMousePosition = mousePosition;
             break;
@@ -721,12 +722,14 @@ function handleTouchMove(event) {
     //allows a longer swipe distance with for less travelling distance when divided by 10px
     if (touchMoveX % 10 === 0) {
         touchMoveX < startTouchX ? moveLeft() : moveRight();
+        freezeTetromino();
     }
 
     //allows a longer swipe distance with for less travelling distance when divided by 10px
     if (touchMoveY % 10 === 0) {
         if (touchMoveY > startTouchY) {
-            moveDown();
+            moveDown()
+            freezeTetromino();
         }
     }
 }
@@ -758,7 +761,7 @@ modalPlay.addEventListener("click", playPause);
 gridContainer.addEventListener("mouseenter", handleEvent);
 gridContainer.addEventListener("mousemove", handleEvent);
 gridContainer.addEventListener("click", rotate);
-gridContainer.addEventListener("contextmenu", dropDown);
+gridContainer.addEventListener("contextmenu", hardDrop);
 
 //touch controls events
 gridContainer.addEventListener("touchstart", handleTouchStart);
