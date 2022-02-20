@@ -14,6 +14,10 @@ const gridContainer = document.getElementById("grid-container");
 const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
+//mouse variable
+let initialMousePosition;
+
+//touch variable
 let startTouchX;
 let startTouchY;
 let tapTimeOut;
@@ -25,6 +29,7 @@ let lockDelay = 500; //initial delay before a tetromino is locked in place
 //it has to be an Array to be manipulated
 let squares = Array.from(createGridDivs());
 
+//game stats
 let score = 0;
 let level = 1;
 let totalClearedLines = 0;
@@ -658,20 +663,35 @@ function controls(event) {
     }
 }
 
-// function handleEvent(event) {
-//     event.preventDefault();
-//     let initialPosition = event.clientX;
-//     if (event.type === 'mousemove') {
-//         let mousePosition = '(' + event.clientX + ',' + event.clientY + ')';
-//         displayLevel.innerHTML = mousePosition;
-//     }
+/**
+ * Handle mouse controls, slide left / right and rotate clockwise
+ */
+function handleEvent(event) {
+    event.preventDefault();
 
-//     if(event.clientX > initialPosition){
-//         moveRight();
-//     }
-//         console.log("initial position: " + initialPosition);
+    switch (event.type) {
+        case "mouseenter":
+            initialMousePosition = event.clientX;
+            break;
+        case "mousemove":
+            let mousePosition = event.clientX;
 
-// }
+            if (mousePosition % 10 === 0) {
+                if (mousePosition > initialMousePosition) {
+                    moveRight();
+                } else {
+                    moveLeft();
+                }
+            }
+            initialMousePosition = mousePosition;
+            break;
+        case "click":
+            rotate();
+            break;
+        default:
+            return;
+    }
+}
 
 /**
  * Register initial touch point to determine movement direction
@@ -726,6 +746,8 @@ function handleTouchEnd(event) {
     }
 }
 
+window.addEventListener("contextmenu", (e) => e.preventDefault);
+
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", playPause);
@@ -733,8 +755,10 @@ playButton.addEventListener("click", playPause);
 instructionsButton.addEventListener("click", instructions);
 
 modalPlay.addEventListener("click", playPause);
-
-// gridContainer.addEventListener("mousemove", );
+gridContainer.addEventListener("mouseenter", handleEvent);
+gridContainer.addEventListener("mousemove", handleEvent);
+gridContainer.addEventListener("click", rotate);
+gridContainer.addEventListener("contextmenu", dropDown);
 
 //touch controls events
 gridContainer.addEventListener("touchstart", handleTouchStart);
