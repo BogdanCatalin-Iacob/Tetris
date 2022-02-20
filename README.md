@@ -391,6 +391,9 @@ Home Page<br>
 - When a tetromino was rotated between a wall and another block, it was kicked away from the wall but overlapped other block and locked in place:
     - isTaken() function was implemented to check overlapping blocks when rotate
     - also the same method was integrated into checkRotatedPosition() function to check overlapping blocks when tetrominoes hit the walls
+
+- When the tetromino was moved left / right or down using mouse / touch controls the blocks disappeared before locking in place.
+    - the solution was to call freezeTetromino() after each move to ensure the blocks lock in place and remain displayed
 ***
 ## Deployment
 
