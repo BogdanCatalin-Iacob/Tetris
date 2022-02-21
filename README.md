@@ -421,6 +421,7 @@ Home Page<br>
 
 -   ### Media
     - The sound effects were taken from [MixKit](https://mixkit.co/free-sound-effects/arcade/)
+    - The background music was taken from [Chosic](https://www.chosic.com/download-audio/28361/)
     - The keyboard image used in instructions is made by me (Bogdan Iacob)
 
 -   ### Acknowledgements
