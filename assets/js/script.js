@@ -633,26 +633,39 @@ function gameOver() {
     //check the row under miniGrid (row 5 of the main grid) for any taken square
     for (let i = 40; i <= 49; i++) {
         if (squares[i].classList.contains('taken')) {
-            // displayScore.innerHTML = 'end';
-            clearInterval(timerId);
-            timerId = null;
+            playPause(); //pause the game 
             undrawTetromino();
-            removeEventsListeners(); //remove mouse and touch event listeners
+            removeEventsListeners(); //remove event listeners
 
             //set Game over message in the modal box and display the score
             modalBox.innerHTML = `<h1>GAME OVER!<br></h1>
                                 <h2>Your score: ${score}</h2>
                                 <h2>Level: ${level}</h2>
-                                <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>`;
+                                
+                                <!--reload the page to restart the game-->
+                                <div class="center">
+                                    <button class="button modal-button" onclick="location.reload()">Restart</button>
+                                </div>`;
             openModal();
         }
     }
 }
 
 /**
- * Remove mouse and touch eventListener associated with playfield area
+ * Remove all eventListener
  */
 function removeEventsListeners() {
+
+    document.removeEventListener("keyup", controls);
+
+    playButton.removeEventListener("click", playPause);
+
+    soundsButton.removeEventListener("click", playSounds);
+
+    instructionsButton.removeEventListener("click", instructions);
+
+    modalPlay.removeEventListener("click", playPause);
+
     gridContainer.removeEventListener("mouseenter", handleEvent);
     gridContainer.removeEventListener("mousemove", handleEvent);
     gridContainer.removeEventListener("click", handleEvent);
