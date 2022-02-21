@@ -420,7 +420,8 @@ Home Page<br>
         - rotation
 
 -   ### Media
-    - 
+    - The sound effects were taken from [MixKit](https://mixkit.co/free-sound-effects/arcade/)
+    - The keyboard image used in instructions is made by me (Bogdan Iacob)
 
 -   ### Acknowledgements
     - I'd like to thank my mentor Daisy McGirr for her guidance throughout my project.<br>
