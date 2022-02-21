@@ -115,6 +115,13 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 |      Functions      |
  --------------------*/
 
+ //Sounds() code credit: Mt. Ford Studios - https://www.youtube.com/watch?v=LfSBbrGqFV0
+ /**
+  * Plays sourced audio files without waiting the end of the current playing sound
+  * @param {*} src -> takes the audio source
+  * @param {*} maxStreams -> max number of repeted sound
+  * @param {*} vol -> volume of the source sound
+  */
 function Sounds(src, maxStreams, vol) {
     this.streamNum = 0;
     this.streams = [];
@@ -718,9 +725,6 @@ function handleEvent(event) {
             break;
         case "click":
             rotate();
-            break;
-        case "scroll":
-            moveDown();
             break;
         default:
             return;
