@@ -663,10 +663,14 @@ function playPause() {
  * display a modal with a set of how to play instructions
  */
 function instructions() {
+    playPause(); //pause the game while intruction modal is on
+    closeModal(); //close the playPause() modal
+
+    //assign new content to the instruction modal (game instructions)
     document.getElementById("intructions").innerHTML = `
         <h1>Instructions!</h1>
                 <br>
-        <a href="#" onclick="closeModal()" title="Close" class="modal-close">Close</a>
+        <a href="#" onclick="closeModal(); playPause();" title="Close" class="modal-close">Close</a>
         
         <p>- Stack flat, but not too flat, to allow S and Z tetrominoes to stack without creating gaps. Having a
             flat field will allow a player to rotate less, which saves time. A player will also have more
@@ -686,6 +690,7 @@ function instructions() {
             alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
         up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume" width=100% />`;
 
+    //open modal with new content
     openModal();
 }
 
