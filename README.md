@@ -272,6 +272,7 @@ Home Page<br>
         - game speed
         - lock in place delay
         - game over
+        - instructions
         
     -   ### Test Results
 
@@ -323,9 +324,11 @@ Home Page<br>
             - When Instruction modal is closed the sound gets back to initial state -> work as expected
 
         - #### Modal pop-up
-            - start-up modal  displays game instructions -> work as expected
-                - "Play" button will close the modal and start the game -> work as expected
-                - "Close" button will close the modal, but will not start the game -> work as expected
+            - start-up modal  displays game controls
+                - for screens over 1024px keyboard and mouse controls -> work as expected
+                - for screens under 1024px touch controls -> work as expected
+            - "Play" button will close the modal and start the game -> work as expected
+            - "Close" button will close the modal, but will not start the game -> work as expected
 
         - #### Score adding up and display
             - each time the player clears lines variable points will be awarded based on [scoring system](#scoring-system) -> work as expected
@@ -358,7 +361,17 @@ Home Page<br>
         - #### Game over
             - if a shape is locked in place at the top (first row) of the playfield a modal will pop-up displaying "Game Over", the score and the level of the current game -> work as expected
             - when game is over the sound goes of(if on) and all the event listeners arer removed ->  work as expected
-            - the modal has a Restart button which if clicked will reload the page to restart the game -> work as expected     
+            - the modal has a Restart button which if clicked will reload the page to restart the game -> work as expected  
+
+        - #### Instructions
+            - when instructions button is clicked a set of helping information and an image of the controls will be displayed
+                - if the screen size is under 1024px an image of touch controls is displayed -> work as expected
+                - if the screen size is over 1024px an image of keyboard and mouse is displayed -> work as expected  
+                - the game is paused -> work as expected
+                - the sound is turned off (if on) -> work as expected
+            - when instructions modal is closed:
+                - the game resumes -> work as expected
+                - the sound gets back to initial state before pause (on or off) -> work as expected
 
      
 
