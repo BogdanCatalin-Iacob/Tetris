@@ -163,6 +163,15 @@ font-size: 1.2rem;
     margin: auto;
     transform: translate(-50%, -50%);
   }
+  #keyboard-controls{
+      display: block;
+      width: 100%;
+  }
+
+  #touch-controls{
+      display: none;
+      width: 100%;
+  }
 
 /*--------------------
 |      Media query    |
@@ -181,5 +190,13 @@ font-size: 1.2rem;
  @media screen and (max-width:1024px) {
     #game-area{
         max-width: 45%;
+    }
+
+    #keyboard-controls{
+        display: none;
+    }
+
+    #touch-controls{
+        display: block;
     }
 }
