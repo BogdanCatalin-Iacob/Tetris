@@ -16,6 +16,7 @@ const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
 //sound effects
+let soundFlag; //confirms the sound was on / off when the game was paused
 let soundVolume = 0.5;
 let moveSound = new Sounds("assets/Sound-Effects/mixkit-retro-game-notification-212.wav", 20, soundVolume - 0.4);
 let rotateSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-jump-coin-216.wav", 10, soundVolume + 0.2);
@@ -118,16 +119,16 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 |      Functions      |
  --------------------*/
 
- /**
+/**
  * Switch on / off sounds when sound button is clicked.
  * By default game starts with sound off
  */
 function playSounds() {
-    if(soundVolume > 0){
+    if (soundVolume > 0) {
         soundVolume = 0;
         backgroundSound.pause();
         soundsButton.innerHTML = "Sound: Off";
-    }else{
+    } else {
         soundVolume = 0.5;
         backgroundSound.volume = soundVolume - 0.2;
         backgroundSound.play();
@@ -676,8 +677,19 @@ function playPause() {
                                                             <div class="center">
                                                                 <button class="button modal-button" onclick="playPause()">Resume</button>
                                                             </div>`;
+
+        if (soundVolume > 0) {
+            soundFlag = true;
+            playSounds();
+        }
+
         openModal();
+
     } else {
+        if (soundFlag) {
+            playSounds();
+            soundFlag = false;
+        }
         drawTetromino();
         timerId = setInterval(moveDown, 1000);
         playButton.innerHTML = "Pause";
