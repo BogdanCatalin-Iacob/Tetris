@@ -14,6 +14,12 @@ const gridContainer = document.getElementById("grid-container");
 const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
+//sound effects
+let moveSound = new Sounds("assets/Sound-Effects/mixkit-retro-game-notification-212.wav", 20, 0.5);
+let rotateSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-jump-coin-216.wav", 10, 0.5);
+let clearSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-complete-or-approved-mission-205.wav", 10, 0.5);
+let dropSound = new Sounds("assets/Sound-Effects/mixkit-martial-arts-fast-punch-2047.wav", 20, 0.5);
+
 //mouse variable
 let initialMousePosition;
 
@@ -108,6 +114,22 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 /*--------------------
 |      Functions      |
  --------------------*/
+
+function Sounds(src, maxStreams, vol) {
+    this.streamNum = 0;
+    this.streams = [];
+    for (let i = 0; i < maxStreams; i++) {
+        this.streams.push(new Audio(src));
+        this.streams[i].volume = vol;
+    }
+
+    this.play = function () {
+        this.streamNum = (this.streamNum + 1) % maxStreams;
+        this.streams[this.streamNum].play();
+    }
+}
+
+
 /**
  * Open intruction modal when the DOM is loaded
  */
@@ -212,7 +234,9 @@ function moveDown() {
     }
 
     displayNextShape();
+    moveSound.play();
     drawTetromino();
+
     //gives the chance to move / slide the tetromino before it locks in place
     setTimeout(freezeTetromino, lockDelay);
 }
@@ -242,6 +266,7 @@ function hardDrop() {
         }
     }
     drawTetromino();
+    dropSound.play();
     freezeTetromino();
 }
 
@@ -306,6 +331,7 @@ function moveLeft() {
     if (currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"))) {
         currentPosition += 1;
     }
+    moveSound.play();
     drawTetromino();
 }
 
@@ -325,6 +351,7 @@ function moveRight() {
     if (currentTetromino.some(index => squares[currentPosition + index].classList.contains('taken'))) {
         currentPosition -= 1;
     }
+    moveSound.play();
     drawTetromino();
 }
 
@@ -429,6 +456,7 @@ function rotate() {
     isTaken(rightRotation);
 
     checkRotatedPosition();
+    rotateSound.play();
     drawTetromino();
 }
 
@@ -445,6 +473,7 @@ function rotateAntiClockwise() {
     isTaken(leftRotation);
 
     checkRotatedPosition();
+    rotateSound.play();
     drawTetromino();
 }
 
@@ -471,6 +500,7 @@ function addScore() {
         if (row.every(index => squares[index].classList.contains('taken'))) {
             //count the cleared lines at once
             clearedlines += 1;
+            clearSound.play();
 
             //make each cell of the full row hidden and available
             row.forEach(index => {
@@ -688,6 +718,9 @@ function handleEvent(event) {
             break;
         case "click":
             rotate();
+            break;
+        case "scroll":
+            moveDown();
             break;
         default:
             return;
