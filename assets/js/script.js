@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     saveTopScore();
     openModal();
+    playSounds();
 });
 
 const width = 10; //number of squares on a row
@@ -15,10 +16,12 @@ const modal = document.getElementById("modal");
 const modalPlay = document.getElementById("modal-play");
 
 //sound effects
-let moveSound = new Sounds("assets/Sound-Effects/mixkit-retro-game-notification-212.wav", 20, 0.5);
-let rotateSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-jump-coin-216.wav", 10, 0.5);
-let clearSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-complete-or-approved-mission-205.wav", 10, 0.5);
-let dropSound = new Sounds("assets/Sound-Effects/mixkit-martial-arts-fast-punch-2047.wav", 20, 0.5);
+let soundVolume = 0.5;
+let moveSound = new Sounds("assets/Sound-Effects/mixkit-retro-game-notification-212.wav", 20, soundVolume - 0.4);
+let rotateSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-jump-coin-216.wav", 10, soundVolume + 0.2);
+let clearSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-complete-or-approved-mission-205.wav", 10, soundVolume + 0.2);
+let dropSound = new Sounds("assets/Sound-Effects/mixkit-martial-arts-fast-punch-2047.wav", 20, soundVolume + 0.2);
+let backgroundSound = new Audio("assets/Sound-Effects/Snow-field.mp3");
 
 //mouse variable
 let initialMousePosition;
@@ -114,6 +117,28 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 /*--------------------
 |      Functions      |
  --------------------*/
+
+ /**
+ * Switch on / off sounds when sound button is clicked.
+ * By default game starts with sound off
+ */
+function playSounds() {
+    if(soundVolume > 0){
+        soundVolume = 0;
+        backgroundSound.pause();
+        soundsButton.innerHTML = "Sound: Off";
+    }else{
+        soundVolume = 0.5;
+        backgroundSound.volume = soundVolume - 0.2;
+        backgroundSound.play();
+        backgroundSound.loop = true;
+        soundsButton.innerHTML = "Sound: On";
+    }
+    moveSound = new Sounds("assets/Sound-Effects/mixkit-retro-game-notification-212.wav", 20, soundVolume);
+    rotateSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-jump-coin-216.wav", 10, soundVolume);
+    clearSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-complete-or-approved-mission-205.wav", 10, soundVolume);
+    dropSound = new Sounds("assets/Sound-Effects/mixkit-martial-arts-fast-punch-2047.wav", 20, soundVolume);
+}
 
 //Sounds() code credit: Mt. Ford Studios - https://www.youtube.com/watch?v=LfSBbrGqFV0
 /**
@@ -804,11 +829,12 @@ function handleTouchEnd(event) {
     }
 }
 
-window.addEventListener("contextmenu", (e) => e.preventDefault);
 
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", playPause);
+
+soundsButton.addEventListener("click", playSounds);
 
 instructionsButton.addEventListener("click", instructions);
 
