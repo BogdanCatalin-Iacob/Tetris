@@ -388,39 +388,54 @@ Home Page<br>
         - Mozilla Firefox: <br>
     - Test header's logo to redirect to index.html (on all pages) - worked as expected on all tested browsers
 
+    - ### Issues and Resolutions to issues found during testing
+        - Tetrominoes where passing through the bottom of the board:
+        - They were freezing at higher positions if manually set but when the setting was last row of the grid they were just passing down. <br>
+        I had to set a flag into freezeTetromino() and pass the return to moveDown() as condition to change the current position.
 
-*  
-### Issues and Resolutions to issues found during testing
-- Tetrominoes where passing through the bottom of the board:
-    - They were freezing at higher positions if manually set but when the setting was last row of the grid they were just passing down. <br>
-    I had to set a flag into freezeTetromino() and pass the return to moveDown() as condition to change the current position.
+        - Tetromino rotation was changing the randomly selected shape to the same one after first rotation
+        - I had to refactor and return three values from the randomTetromino() function:
+            - currentTetrominoShape - the piece placed on the gameboard
+            - randomShape - the piece randomly selected in the pieces array (theTetrominoes)
+            - randomRotation - the rotation of the tetromino when it is spawned
+            and destructure this in new variables to be used to redraw the same shape with a different rotation.
 
-- Tetromino rotation was changing the randomly selected shape to the same one after first rotation
-    - I had to refactor and return three values from the randomTetromino() function:
-        - currentTetrominoShape - the piece placed on the gameboard
-        - randomShape - the piece randomly selected in the pieces array (theTetrominoes)
-        - randomRotation - the rotation of the tetromino when it is spawned
-    and destructure this in new variables to be used to redraw the same shape with a different rotation.
+        - Removing full rows to add score in addScore() function :
+            - refactor variable square from const to let and assign an Array.from() grid childNodes to be able to slice() the full rows and add the same number of rows at the top of the grid so it won't appear smaller
 
-- Removing full rows to add score in addScore() function :
-    - refactor variable square from const to let and assign an Array.from() grid childNodes to be able to slice() the full rows and add the same number of rows at the top of the grid so it won't appear smaller
+        - When a tetromino was rotated between a wall and another block, it was kicked away from the wall but overlapped other block and locked in place:
+            - isTaken() function was implemented to check overlapping blocks when rotate
+            - also the same method was integrated into checkRotatedPosition() function to check overlapping blocks when tetrominoes hit the walls
 
-- When a tetromino was rotated between a wall and another block, it was kicked away from the wall but overlapped other block and locked in place:
-    - isTaken() function was implemented to check overlapping blocks when rotate
-    - also the same method was integrated into checkRotatedPosition() function to check overlapping blocks when tetrominoes hit the walls
+        - When the tetromino was moved left / right or down using mouse / touch controls the blocks disappeared before locking in place.
+            - the solution was to call freezeTetromino() after each move to ensure the blocks lock in place and remain displayed
 
-- When the tetromino was moved left / right or down using mouse / touch controls the blocks disappeared before locking in place.
-    - the solution was to call freezeTetromino() after each move to ensure the blocks lock in place and remain displayed
-***
 ## Deployment
 
 -   ### Project Creation
+The project was started by navigating to the [template](https://github.com/Code-Institute-Org/gitpod-full-template) and clicking 'Use this template'. Under Repository name I input "Tetris" and checked the Include all branches checkbox. I then navigated to the new [repository](https://github.com/BogdanCatalin-Iacob/Tetris). I then clicked the Gitpod button to open the project in Gitpod.
+
+ The following commands were used throughout the project:
+* git add *filename* - This command was used to add files to the staging area before commiting.
+* git commit -m *commit message explaining the updates* - This command was used to to commit changes to the local repository.
+* git push - This command is used to push all commited changes to the GitHub repository. 
+* git pull - This command was used to get the updated content from github repository after I changed the Readme File on github.com
 
 -   ### Using Github Pages
-1.
+1. Navigate to the GitHub [Repository:](https://github.com/BogdanCatalin-Iacob/Tetris)
+1. Click the 'Settings' Tab.
+1. Scroll Down to the Git Hub 'Pages' Heading.
+1. Select 'main' as the source.
+1. Click the Save button.
+1. Click on the link to go to the live deployed page.
 
 -   ### Run Locally
-1.
+1. Navigate to the GitHub [Repository:](https://github.com/BogdanCatalin-Iacob/Tetris)
+1. Click the Code drop down menu.
+1. Either Download the ZIP file, unpackage locally and open with IDE (This route ends here) OR Copy Git URL from the HTTPS dialogue box.
+1. Open your developement editor of choice and open a terminal window in a directory of your choice.
+1. Use the 'git clone' command in terminal followed by the copied git URL.
+1. A clone of the project will be created locally on your machine.
 
 ***
 ## Credits
@@ -429,7 +444,6 @@ Home Page<br>
     - The code for touch controls is based on the youtube tutorial [RTS CMK](https://www.youtube.com/watch?v=BzNFBs4p3FE)
     - The code for repeted sound play (each time when a tetromino is moved) was taken from [Mt. Ford Studios](https://www.youtube.com/watch?v=LfSBbrGqFV0)
    
-
 -   ### Content
     - The game is developed based on some rules found on [tetris wiki](https://tetris.fandom.com/wiki/Tetris_Wiki):
         - bricks color
