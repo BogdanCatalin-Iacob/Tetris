@@ -738,9 +738,12 @@ function instructions() {
         <p>- When having two open columns, deal with it as soon as possible. Over stacking will make things
             worse by having to wait on even more l shapes.</p>
 
-        <img id="keyboard-controls" src="assets/images/keyboard-layout.PNG"
+        <img id="keyboard-controls" src="assets/images/keyboard-mouse.PNG"
             alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
-        up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume" width=100% />`;
+        up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume"/>
+        
+        <img id="touch-controls" src="assets/images/touch-controls.PNG"
+                alt="drawing of a hand with instruction to swipe left, right or down for tetromino movement and tap for rotation of the tetromino"/>`; 
 
     //open modal with new content
     openModal();
