@@ -53,10 +53,10 @@ const colors = [
     'purple',
     'yellow',
     'cyan'
-]
+];
 
 let currentPosition = 6; // the tetrominoes will spawn at this index on the grid
-let nextShapePosition = 6 //next shape position in the mini grid
+let nextShapePosition = 6; //next shape position in the mini grid
 let timerId; //will be set to move down the tetrominoes depending on the level
 setMiniGrid();
 
@@ -159,7 +159,7 @@ function Sounds(src, maxStreams, vol) {
     this.play = function () {
         this.streamNum = (this.streamNum + 1) % maxStreams;
         this.streams[this.streamNum].play();
-    }
+    };
 }
 
 /**
@@ -181,7 +181,7 @@ function closeModal() {
  */
 function createGridDivs() {
     for (let i = 0; i < 240; i++) {
-        gridContainer.innerHTML += `<div class="square"></div>`
+        gridContainer.innerHTML += `<div class="square"></div>`;
     }
     return gridContainer.childNodes;
 }
@@ -243,7 +243,7 @@ function drawNextTetromino() {
     nextTetromino.forEach(index => {
         squares[nextShapePosition + index].classList.add('tetromino');
         squares[nextShapePosition + index].style.backgroundColor = colors[nextShape];
-    })
+    });
 }
 
 /**
@@ -331,7 +331,7 @@ function freezeTetromino() {
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
 
         //assign the next tetromino to the current tetromino
-        [currentTetromino, currentShape, currentRotation] = [nextTetromino, nextShape, nextRotation]
+        [currentTetromino, currentShape, currentRotation] = [nextTetromino, nextShape, nextRotation];
         currentPosition = nextShapePosition;
         addScore();
         gameOver();
@@ -357,7 +357,9 @@ function moveLeft() {
             currentPosition > 26 && currentPosition < 30 ||
             currentPosition > 36) && !isAtLeftEdge;
 
-    miniGridTrue ? currentPosition-- : false;
+    if(miniGridTrue){
+        currentPosition--;
+    }
 
     //if the left square is taken, move the tetromino back 1 square so it appears not moved
     if (currentTetromino.some(index => squares[currentPosition + index].classList.contains("taken"))) {
@@ -397,14 +399,14 @@ for isAtLeft(), isAtRight() and checkRotatedPosition(P) methods
  * Check if the tetromino is at the right edge of the board
  */
 function isAtRight() {
-    return currentTetromino.some(index => (currentPosition + index + 1) % width === 0)
+    return currentTetromino.some(index => (currentPosition + index + 1) % width === 0);
 }
 
 /**
  * Check if the tetromino is at the left edge of the board
  */
 function isAtLeft() {
-    return currentTetromino.some(index => (currentPosition + index) % width === 0)
+    return currentTetromino.some(index => (currentPosition + index) % width === 0);
 }
 
 /**
@@ -413,7 +415,7 @@ function isAtLeft() {
  * before it is displayed in the new or same position position
  */
 function checkRotatedPosition(P) {
-    P = P || currentPosition //get current position.  Then, check if the piece is near the left side.
+    P = P || currentPosition; //get current position.  Then, check if the piece is near the left side.
     if ((P + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
         if (isAtRight()) { //use actual position to check if it's flipped over to right side
             currentPosition += 1; //if so, add one to wrap it back around
@@ -812,7 +814,7 @@ function handleTouchStart(event) {
         clearTimeout(tapTimeOut);
     }
     tapTimeOut = setTimeout(() => {
-        isTaplength = false
+        isTaplength = false;
     }, 200);
 }
 
@@ -833,7 +835,7 @@ function handleTouchMove(event) {
     //allows a longer swipe distance with for less travelling distance when divided by 10px
     if (touchMoveY % 10 === 0) {
         if (touchMoveY > startTouchY) {
-            moveDown()
+            moveDown();
             freezeTetromino();
         }
     }
