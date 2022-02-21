@@ -115,13 +115,13 @@ const theTetrominoes = [lTetromino, jTetromino, sTetromino, zTetromino, tTetromi
 |      Functions      |
  --------------------*/
 
- //Sounds() code credit: Mt. Ford Studios - https://www.youtube.com/watch?v=LfSBbrGqFV0
- /**
-  * Plays sourced audio files without waiting the end of the current playing sound
-  * @param {*} src -> takes the audio source
-  * @param {*} maxStreams -> max number of repeted sound
-  * @param {*} vol -> volume of the source sound
-  */
+//Sounds() code credit: Mt. Ford Studios - https://www.youtube.com/watch?v=LfSBbrGqFV0
+/**
+ * Plays sourced audio files without waiting the end of the current playing sound
+ * @param {*} src -> takes the audio source
+ * @param {*} maxStreams -> max number of repeted sound
+ * @param {*} vol -> volume of the source sound
+ */
 function Sounds(src, maxStreams, vol) {
     this.streamNum = 0;
     this.streams = [];
@@ -135,7 +135,6 @@ function Sounds(src, maxStreams, vol) {
         this.streams[this.streamNum].play();
     }
 }
-
 
 /**
  * Open intruction modal when the DOM is loaded
@@ -612,6 +611,7 @@ function gameOver() {
             clearInterval(timerId);
             timerId = null;
             undrawTetromino();
+            removeEventsListeners(); //remove mouse and touch event listeners
 
             //set Game over message in the modal box and display the score
             modalBox.innerHTML = `<h1>GAME OVER!<br></h1>
@@ -621,6 +621,19 @@ function gameOver() {
             openModal();
         }
     }
+}
+
+/**
+ * Remove mouse and touch eventListener associated with playfield area
+ */
+function removeEventsListeners() {
+    gridContainer.removeEventListener("mouseenter", handleEvent);
+    gridContainer.removeEventListener("mousemove", handleEvent);
+    gridContainer.removeEventListener("click", handleEvent);
+
+    gridContainer.removeEventListener("touchstart", handleTouchStart);
+    gridContainer.removeEventListener("touchmove", handleTouchMove);
+    gridContainer.removeEventListener("touchend", handleTouchEnd);
 }
 
 /**
@@ -798,7 +811,6 @@ modalPlay.addEventListener("click", playPause);
 gridContainer.addEventListener("mouseenter", handleEvent);
 gridContainer.addEventListener("mousemove", handleEvent);
 gridContainer.addEventListener("click", rotate);
-gridContainer.addEventListener("contextmenu", hardDrop);
 
 //touch controls events
 gridContainer.addEventListener("touchstart", handleTouchStart);
