@@ -273,8 +273,6 @@ Home Page<br>
         - lock in place delay
         - game over
         
-
-
     -   ### Test Results
 
         - #### Random shapes
@@ -317,6 +315,12 @@ Home Page<br>
             - when button text display "Pause" if pressed the game will be paused - work as expected
 
         - #### Sound
+            - If sound is off and the button is clicked the sounds fx must play and the button text change to "Sound: On" -> work as expected
+            - If the sound is on and the button is clicked the sound fx must stop playing and the button text change to "Sound: Off" -> work as expected
+            - When the game is paused the sound goes off (if on) - worked as expected
+            - When the game resume, the sound goes back to initial state before pause (on / off) -> work as expected 
+            - When Instruction modal is displayed sound goes off -> work as expected
+            - When Instruction modal is closed the sound gets back to initial state -> work as expected
 
         - #### Modal pop-up
             - start-up modal  displays game instructions -> work as expected
@@ -353,8 +357,8 @@ Home Page<br>
 
         - #### Game over
             - if a shape is locked in place at the top (first row) of the playfield a modal will pop-up displaying "Game Over", the score and the level of the current game -> work as expected
-
-      
+            - when game is over the sound goes of(if on) and all the event listeners arer removed ->  work as expected
+            - the modal has a Restart button which if clicked will reload the page to restart the game -> work as expected     
 
      
 
