@@ -453,7 +453,7 @@ The project was started by navigating to the [template](https://github.com/Code-
 -   ### Media
     - The sound effects were taken from [MixKit](https://mixkit.co/free-sound-effects/arcade/)
     - The background music was taken from [Chosic](https://www.chosic.com/download-audio/28361/)
-    - The keyboard image used in instructions is made by me (Bogdan Iacob)
+    - The keyboard, mouse and touch images used in instructions are made by me (Bogdan Iacob)
 
 -   ### Acknowledgements
     - I'd like to thank my mentor Daisy McGirr for her guidance throughout my project.<br>
