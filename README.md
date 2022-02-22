@@ -67,19 +67,20 @@ The live website can be found [here]().
 -   ### Structure
 
     -   #### General Information
-        - The website will have two pages. The main page will display the Tetris game and the secondary page will be a 404 error page.
-        - The largest part of the tetrion consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
-        - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a given orientation and color depending on its shape. Part of the tetrion, called the piece preview, shows the next pieces that will enter the playfield.
-        - The player can rotate the falling tetromino ninety degrees at a time within the plane of the playfield by pressing the clockwise rotation button (Arrow Up) or anti clockwise button (z) if the piece has room to rotate.
-        - The player can shift the falling tetromino sideways one space at a time by pressing the left or right arrow. Pieces cannot shift through walls or other blocks.
-        - Each tetromino moves downward slowly by itself. Generally a player can use some method to "drop" the tetromino, or make it move downward faster. Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in which time the player can move it. After locking, a player can no longer move the tetromino.
+        - The website will one page. The main page will display the Tetris game.
+        - The largest part of the tetris game consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
+        - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a random orientation and a specific color depending on its shape. Part of the tetris game measuring 4 spaces across and 4 spaces down is called the piece preview, and shows the next pieces that will enter the playfield.
+        - The player can rotate the falling tetromino ninety degrees at a time within the playfield by pressing the clockwise rotation button (Arrow Up) or anti clockwise button (z) if the piece has room to rotate.
+        - The player can shift (slide) the falling tetromino sideways one space at a time by pressing the left or right arrow. Pieces cannot shift through walls or other blocks.
+        - Each tetromino moves downward slowly by itself. Generally a player can use a method to "drop" the tetromino (pressing spacebar on keyboard), or make it move downward faster (pressing Down Arrow on keyboard or dragging down on touch devices). Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in place giving the player time to move it. After locking, a player can no longer move the tetromino.
         - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
+        - When lines are cleared some score will be awarded to player.
         - If the playfield has not filled up with blocks, the next piece enters.
 
     -   #### List Of Rules
         - A piece / shape / tetromino in Tetris is a geometric shape consisting of a set of blocks that is moved as a unit. A block (or mino) is the part of a piece that fills one unit of the playfield.
-        - Playfield is 10 columns x 24 rows.
-        - First 4 row are not part of the playing field, they are reserved for minigrid
+        - Game area is 10 columns x 24 rows.
+        - First 4 rows are not part of the playing field, they are reserved for minigrid
         - Mini grid is 4 columns x 4 rows
         - Next shape is displayed in the mini grid
         - Tetromino colors are as follows:
@@ -95,31 +96,43 @@ The live website can be found [here]().
         - Initial rotation will be selected random from all possible piece rotations
         - Standard mapping for keyboard:
             - Up Arrow - rotate piece 90deg clockwise
-            - Left Arrow - move the oiece to left one cell if no obstruction
+            - Left Arrow - move the piece to left one cell if no obstruction
             - Right Arrow - move the piece to right by one cell if no obstruction
             - Down Arrow - move the piece down faster
             - z - rotate piece 90deg anti clockwise
             - space bar - hard drop
-        - Use of half second lock delay
+        - Standard mapping for mouse:
+            - Slide mouse left - move the piece to left one cell if no obstruction
+            - Slide mouse right - move the piece to right one cell if no obstruction
+            - Left click - rotate the tetromino clockwise
+        - Standard mapping for touch
+            - Drag left - move the piece to left one cell if no obstruction
+            - Drag right - move the piece to right one cell if no obstruction
+            - Drag down - move the piece to down faster
+            - Tap - rotate clockwise
+        - Use of half second initial lock delay which will be decreased when level is going up
         - Next shape is displayed immediately after the playing tetromino gets out of the top right corner (mini grid)
         - When a row is fully covered / taken it must dissapear and score must be increased (line clear)
         - Top Score will be saved on local storage
 
     -   #### Game Mechanics
+
         - ##### Rotation
             - Initial rotation will be selected randomly for each spawned piece
             - Tetrominoes can be rotated clockwise or anti-clockwise
             - If the rotated tetromino overlaps another block, the rotation will be reverted so the shape appears not rotated
             - If the rotated tetromino goes beyond the bottom of the playfield, the rotation will be reverted so the shape appears not rotated
+
         - ##### Wall Kick
             - A wall kick happens when a player rotates a piece when no space exists in the squares where that tetromino would normally occupy after the rotation.
             To compensate, the game will move the piece one space into the opposite direction of the wall (for left wall position will move towards right and for right wall position will move towards left).
+
         - ##### Movement
             - The tetrominoes can move / slide towards left or right until they touch a side wall or another brick which occupies the square
             - Moving down is done automatically by the game at a 1000ms initial speed which will get faster when the player level is going up
             - Moving down can be done faster manually by pressing the moving down key (Down Arrow).
             - Hard drop (space bar key) of tetrominoes instant places the shape at the bottom of the playfield (if free) or on top of other blocks (if present) 
-            - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms to slide it in a different location before it locks down and a different piece is spawned.
+            - When the current tetromino touches the bottom of the play field or the top of another brick, the player has 500ms (or less depending on the level) to slide it in a different location before it locks down and a different piece is spawned.
 
         - ##### Scoring system
             | Level | | | Points for| |
@@ -182,7 +195,7 @@ An icon in made with Favicon will be displayed in the browser's tab.
 
     -   #### Wireframes
 Home Page<br>
-![Home Page Wireframe](/assets/images/Wireframes/)<br>
+![Home Page Wireframe](assets/images/Wireframes/wieframes.PNG)<br>
 
 -   ### Limitations
     - Top score is saved on local storage due to no database
@@ -202,15 +215,15 @@ Home Page<br>
     - Rotation system
     - Collision detection
     - Keyboard controls
-
-- Error page (404) to redirect the user back to home page<br>
-    ![error-page](/assets/images/Features-images/)<br>
+    - Mouse controls
+    - Touch controls
 
 - Icon in the browser tab<br>
     ![browser-tab-icon](/assets/images/Features-images/)<br>
 
 -   ### Features Left to Implement
     - Ghost piece
+    - Ask name of the player before game start
     - Save name, level, top score on cloud
 
 ***
@@ -232,21 +245,18 @@ Home Page<br>
 * [GitHub](https://github.com/)
 	* GithHub is the hosting site used to store the source code for the Website and [Git Pages](https://pages.github.com/) is used for the deployment of the live site.
 * [Git](https://git-scm.com/)
-	* Git is used as version control software to commit and push code to the GitHub repository where the source code is stored.
-* [Pixlr](https://pixlr.com/)
-	* Pixlr is used to reduce the file sizes of images before being deployed to reduce storage and bandwith.
+	* Git is used as version control software to commit and push code to the GitHub repository where the source code is stored..
 * [Google Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools)
 	* Google chromes built in developer tools are used to inspect page elements and help debug issues with the site layout and test different CSS styles.
-* [balsamiq Wireframes](https://balsamiq.com/wireframes/)
+* [Microsoft Excel](https://www.microsoft.com/en-us/microsoft-365/excel)
 	* This was used to create wireframes for 'The Skeleton Plane' stage of UX design.
-* [Coolors](https://coolors.co/)
-    * This was used to select color palette. 
 * [Techsini](http://techsini.com/multi-mockup/index.php)
     * tecnisih.com Multi Device Website Mockup Generator was used to create the Mock up image in this README.
 * [Favicon](https://favicon.io/)
     * This was used to generate the icon on browser's tab.
 * [KeyCode](https://keycode.info/)
     * Keycode website was used to get the arrow key codes to move the tetrominoes on the game board
+
 ***
 
 ## Testing
@@ -284,6 +294,8 @@ Home Page<br>
             - rotation must display the shape in the next logical position by pressing:
                 - Up Arrow key for clockwise rotation
                 - Z key for Anti-Clockwise rotation 
+                - mouse left click for Clockwise rotation
+                - touch displays tap for Clockwise rotation
             - if the next rotated position is getting the shape over the walls /floor limit or overlap another shape it will be reverted and the shape appears in the previous rotation
             -  work as expected
 
@@ -294,13 +306,20 @@ Home Page<br>
             - if the shape touches the left or right wall with any of the sides it must not go through and continue normal moving down
                 - Left Arrow key for sliding left
                 - Right Arrow key for sliding right 
+                - Move mouse left for sliding left
+                - Move mouse right for sliding right
+                - Touch displays:
+                    - Drag left for sliding left
+                    - Drag right for sliding right
             - work as expected
 
         - #### Shape hit the another shape
-            - if the shape touches another shape with any of the sides it must stop without overlapping -> work as expected
+            - if the shape touches another shape with any of the sides it must not overlap -> work as expected
+            - if the shape touches with the bottom another shape top it must lock in place (after delay) -> work as expected
 
         - #### Shape soft drop and hard drop
             - faster down movement can be done by pressing Down Arrow Key -> work as expected
+            - faster down movement on mobile devices can be don e by dragging down -> work as expected
             - instant drop can be done by pressing Spacebar key - it will place the shape on the last available free space and lock it in place with no delay -> work as expected
             
         - #### Shape color
@@ -312,7 +331,7 @@ Home Page<br>
             - next shape color must follow the same color code as playing shape -> work as expected 
 
         - #### Play / Pause
-            - when button text display "Play" if pressed the game is starting or resume after pause-> work as expected
+            - when button text display "Play" if pressed the game is starting -> work as expected
             - when button text display "Pause" if pressed the game will be paused - work as expected
 
         - #### Sound
@@ -320,15 +339,15 @@ Home Page<br>
             - If the sound is on and the button is clicked the sound fx must stop playing and the button text change to "Sound: Off" -> work as expected
             - When the game is paused the sound goes off (if on) - worked as expected
             - When the game resume, the sound goes back to initial state before pause (on / off) -> work as expected 
-            - When Instruction modal is displayed sound goes off -> work as expected
-            - When Instruction modal is closed the sound gets back to initial state -> work as expected
+            - When Instructions modal is displayed sound goes off -> work as expected
+            - When Instructions modal is closed the sound gets back to initial state (on / off) -> work as expected
 
         - #### Modal pop-up
-            - start-up modal  displays game controls
+            - start-up modal  displays game controls:
                 - for screens over 1024px keyboard and mouse controls -> work as expected
                 - for screens under 1024px touch controls -> work as expected
-            - "Play" button will close the modal and start the game -> work as expected
-            - "Close" button will close the modal, but will not start the game -> work as expected
+                - "Play" button will close the modal and start the game -> work as expected
+                - "Close" button will close the modal, but will not start the game -> work as expected
 
         - #### Score adding up and display
             - each time the player clears lines variable points will be awarded based on [scoring system](#scoring-system) -> work as expected
@@ -340,7 +359,7 @@ Home Page<br>
 
         - #### Level Update
             - level must increase by 1 each time the player clears a specific number of line equal to (Level * 5) -> work as expected
-            - number of cleared lines at once determine variable bonus lines counted for leveling up 
+            - number of cleared lines at once determine variable bonus lines counted for leveling up: 
                 1. 1 line = 1 line
                 1. 2 lines = 3 lines
                 1. 3 lines = 5 lines
@@ -355,6 +374,7 @@ Home Page<br>
             - game speed is increased (the timer decreased) by 1% for each level completion -> work as expected
 
         - #### Lock in place delay
+            - lock in place happens when a shape touches the bottom of the playfield or the top of another shape
             - initial delay before a tetromino is locked in place is 500ms.
             - lock delay is decreased by 1% for each level completion -> work as expected
 
