@@ -8,21 +8,21 @@
     box-sizing: border-box;
 }
 
-header{
+header {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 30px;
 }
 
-h1{
+h1 {
     text-align: center;
 }
 
 /*--------------------
 |        Buttons      |
  --------------------*/
-button{
+button {
     background-color: #fff;
     width: 6em;
     border: 1px solid #000;
@@ -30,27 +30,27 @@ button{
     box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);
 }
 
-button:hover{
+button:hover {
     background-color: #ccc;
 }
 
-button:active{
+button:active {
     background-color: #8f8;
     transform: translateY(2px);
 }
 
-.center{
+.center {
     display: flex;
     justify-content: center;
 }
 
-.modal-button{
-width: 10em;
-height: 5em;
-border: 3px solid #8f8;
-border-style: outset;
-border-radius: 20%;
-font-size: 1.2rem;
+.modal-button {
+    width: 10em;
+    height: 5em;
+    border: 3px solid #8f8;
+    border-style: outset;
+    border-radius: 20%;
+    font-size: 1.2rem;
 }
 
 
@@ -72,13 +72,13 @@ font-size: 1.2rem;
     position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
     width: 60%;
     height: 16.5%;
     background-color: #fff;
     text-align: center;
 }
-    
+
 #grid-container {
     margin: auto;
     display: grid;
@@ -88,7 +88,6 @@ font-size: 1.2rem;
 }
 
 .square {
-    /* border: 1px solid #000; */
     background-color: #444;
     aspect-ratio: 1/1;
 }
@@ -123,21 +122,21 @@ font-size: 1.2rem;
     z-index: 999;
     pointer-events: auto;
     transition: all 0.3s;
-  }
-  
-  .modal-window h1,
-  .modal-window h2 {
+}
+
+.modal-window h1,
+.modal-window h2 {
     font-size: 1.5rem;
     color: #fffafa;
     margin: 0 0 15px;
     text-align: center;
-  }
+}
 
-  .modal-window p{
-      color: #fffafa;
-  }
-  
-  .modal-close {
+.modal-window p {
+    color: #fffafa;
+}
+
+.modal-close {
     color: #aaa;
     line-height: 20px;
     font-size: 1rem;
@@ -146,14 +145,14 @@ font-size: 1.2rem;
     text-align: center;
     top: 20px;
     text-decoration: none;
-  }
-  
-  .modal-close:hover {
+}
+
+.modal-close:hover {
     color: #fffafa;
     border-bottom: 1px solid #fffafa;
-  }
-  
-  #intructions {
+}
+
+#instructions {
     background-color: rgba(60, 60, 60, 1);
     width: 50%;
     position: absolute;
@@ -162,16 +161,17 @@ font-size: 1.2rem;
     padding: 30px;
     margin: auto;
     transform: translate(-50%, -50%);
-  }
-  #keyboard-controls{
-      display: block;
-      width: 100%;
-  }
+}
 
-  #touch-controls{
-      display: none;
-      width: 100%;
-  }
+#keyboard-controls {
+    display: block;
+    width: 100%;
+}
+
+#touch-controls {
+    display: none;
+    width: 100%;
+}
 
 /*--------------------
 |      Media query    |
@@ -179,24 +179,44 @@ font-size: 1.2rem;
 
 @media screen and (max-width: 700px) {
 
-    #game-area{
+    #game-area {
         max-width: 60%;
     }
-    #grid-container{
+
+    #grid-container {
         grid-template-columns: repeat(10, minmax(20px, 1fr));
+    }
+
+    #instructions {
+        width: 100%;
+    }
+
+    .modal-button {
+        width: 5em;
+        height: 2.5em;
+    }
+
+    .modal-window h1,
+    .modal-window h2 {
+        font-size: 1.2rem;
+    }
+
+    br {
+        content: "";
+        line-height: 0.2rem;
     }
 }
 
- @media screen and (max-width:1024px) {
-    #game-area{
+@media screen and (max-width:1024px) {
+    #game-area {
         max-width: 45%;
     }
 
-    #keyboard-controls{
+    #keyboard-controls {
         display: none;
     }
 
-    #touch-controls{
+    #touch-controls {
         display: block;
     }
 }
