@@ -687,7 +687,7 @@ function playPause() {
         clearInterval(timerId);
         timerId = null;
         playButton.innerHTML = "Play";
-        document.getElementById("intructions").innerHTML = `<h1>Paused</h1>
+        document.getElementById("instructions").innerHTML = `<h1>Paused</h1>
                                                             <br>
                                                             <div class="center">
                                                                 <button class="button modal-button" onclick="playPause()">Resume</button>
@@ -719,16 +719,14 @@ function instructions() {
     closeModal(); //close the playPause() modal
 
     //assign new content to the instruction modal (game instructions)
-    document.getElementById("intructions").innerHTML = `
+    document.getElementById("instructions").innerHTML = `
         <h1>Instructions!</h1>
                 <br>
         <a href="#" onclick="closeModal(); playPause();" title="Close" class="modal-close">Close</a>
         
-        <p>- Stack flat, but not too flat, to allow S and Z tetrominoes to stack without creating gaps. Having a
+        <p>- Try to stack flat, but allow S and Z tetrominoes to stack without creating gaps. A
             flat field will allow a player to rotate less, which saves time. A player will also have more
-            placement opportunities. The even field will allow a player to think less which results in faster
-             reaction times. Also, stacking flat will also mean keeping middle columns lower to the ground,
-             lessening the risk of a block-out.</p>
+            placement opportunities.</p>
         <p>- Try not to build empty columns greater than 2 cells deep, as this will require an I tetromino that
             can be better used to tetris.</p>
         <p>- Use a T to convert an S/Z field position into a Z/S.</p>
