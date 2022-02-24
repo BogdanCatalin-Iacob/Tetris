@@ -775,7 +775,6 @@ function controls(event) {
  * Handle mouse controls, slide left / right and rotate clockwise
  */
 function handleEvent(event) {
-    event.preventDefault();
 
     switch (event.type) {
         case "mouseenter":
@@ -807,7 +806,6 @@ function handleEvent(event) {
  * and set a timeout used for tap detection
  */
 function handleTouchStart(event) {
-    event.preventDefault();
     startTouchX = event.touches[0].clientX;
     startTouchY = event.touches[0].clientY;
     isTaplength = true;
@@ -823,7 +821,6 @@ function handleTouchStart(event) {
  * Move the tetrominoes left, right or down when swipe (use on touch screen devices)
  */
 function handleTouchMove(event) {
-    event.preventDefault();
     let touchMoveX = event.touches[0].clientX;
     let touchMoveY = event.touches[0].clientY;
 
@@ -848,7 +845,6 @@ function handleTouchMove(event) {
  * a single clockwise rotation will happen (use on touch screen devices)
  */
 function handleTouchEnd(event) {
-    event.preventDefault();
     let endTouchX = event.changedTouches[0].clientX;
     let endTouchY = event.changedTouches[0].clientY;
 
