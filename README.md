@@ -46,7 +46,7 @@
 This Game was created for the sole purpose of completing the second Milestone Project for the Code Institute's Full Stack Developer course. 
 It was built using the knowledge gained from the HTML, CSS, User Centric Design and JavaScript modules. A full list of technologies used can be found in the technologies section of this document.
 
-The live website can be found [here]().
+The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetris/).
 ![Website Mock Up](/assets/images/)
 
 ## User Experience (UX)
