@@ -1,6 +1,6 @@
 ## Table of Contents
 * [Purpose](#Purpose)
-* [User Experience Design (UX)](#User-Experience-Design)
+* [User Experience Design (UX)](#user-experience-ux)
   * [User stories](#User-Stories)
     * [First Time Visitor Goals](#First-Time-Visitor-Goals)
     * [Returning Visitor Goals](#Returning-Visitor-Goals)
@@ -15,21 +15,37 @@
       * [Scoring System](#scoring-system)
       * [Leveling Up](#leveling-up)
     * [Methods Of Play](#Methods-Of-Play)
-    * [Diagram Legend](#Diagram-Legend)
   * [Design](#Design)
     * [Colour Scheme](#Colour-Scheme)
     * [Typography](#Typography)
-    * [Imagery](#Imagery)
     * [Wireframes](#Wireframes)
     * [Limitations](#Limitations)
 * [Features](#Features)
     * [Existing Features](#Existing-Features)
-    * [Future Features](#Features-Left-to-Implement)
+    * [Future Left to implement](#Features-Left-to-Implement)
 * [Technologies](#Technologies)
 * [Testing](#Testing)
     * [Test Strategy](#Test-Strategy)
       * [Summary](#Summary)
     * [Test Results](#Test-Results)
+      * [Random shapes](#random-shapes)
+      * [Rotation test](#clockwise-and-anti-clockwise-rotate)
+      * [Floor touch](#shape-hit-the-floor)
+      * [Walls touch](#shape-hit-the-left-or-right-wall)
+      * [Another shape touch](#shape-hit-the-another-shape)
+      * [Soft and Hard Drop](#shape-soft-drop-and-hard-drop)
+      * [Shape Color](#shape-color)
+      * [Next shape](#next-shape-display)
+      * [Play / Pause](#play--pause)
+      * [Sound](#sound)
+      * [Modal popup](#modal-pop-up)
+      * [Score](#score-adding-up-and-display)
+      * [Top Scorey](#top-score)
+      * [Level](#level-update)
+      * [Game speed](#game-speed)
+      * [Lock tetromino](#lock-in-place-delay)
+      * [Game over](#game-over)
+      * [Instructions](#instructions)
     * [Testing Issues](#Issues-and-Resolutions-to-issues-found-during-testing)
 * [Deployment](#Deployment)
     * [Project Creation](#Project-Creation)
@@ -47,7 +63,7 @@ This Game was created for the sole purpose of completing the second Milestone Pr
 It was built using the knowledge gained from the HTML, CSS, User Centric Design and JavaScript modules. A full list of technologies used can be found in the technologies section of this document.
 
 The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetris/).
-![Website Mock Up](/assets/images/)
+<!-- ![Website Mock Up](/assets/images/) -->
 
 ## User Experience (UX)
 
@@ -67,12 +83,15 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
 -   ### Structure
 
     -   #### General Information
-        - The website will one page. The main page will display the Tetris game.
+        - The website will have one page. The main page will display the Tetris game.
         - The largest part of the tetris game consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
-        - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a random orientation and a specific color depending on its shape. Part of the tetris game measuring 4 spaces across and 4 spaces down is called the piece preview, and shows the next pieces that will enter the playfield.
-        - The player can rotate the falling tetromino ninety degrees at a time within the playfield by pressing the clockwise rotation button (Arrow Up) or anti clockwise button (z) if the piece has room to rotate.
-        - The player can shift (slide) the falling tetromino sideways one space at a time by pressing the left or right arrow. Pieces cannot shift through walls or other blocks.
-        - Each tetromino moves downward slowly by itself. Generally a player can use a method to "drop" the tetromino (pressing spacebar on keyboard), or make it move downward faster (pressing Down Arrow on keyboard or dragging down on touch devices). Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in place giving the player time to move it. After locking, a player can no longer move the tetromino.
+        - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a random orientation and a specific color depending on its shape. 
+        - Part of the tetris game (top roght corner) measuring 4 spaces across and 4 spaces down is called the piece preview, and shows the next pieces that will enter the playfield.
+        - The player can rotate the falling tetromino ninety degrees (90deg) at a time within the playfield by pressing the clockwise rotation button (Arrow Up) / left mouse button / tap (on touch screens) or anti clockwise button (z) if the piece has room to rotate.
+        - The player can shift (slide) the falling tetromino sideways one space at a time by pressing the left arrow / move the mouse towards left / drag left (on touch screens) or right arrow / move the mouse towards right / drag right (on touch screens). 
+        - Pieces cannot shift through walls or other blocks.
+        - Each tetromino moves downward slowly by itself. 
+        - Generally a player can use a method to "drop" the tetromino (pressing spacebar on keyboard), or make it move downward faster (pressing Down Arrow on keyboard or dragging down on touch devices). Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in place giving the player time to move it. After locking, a player can no longer move the tetromino.
         - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
         - When lines are cleared some score will be awarded to player.
         - If the playfield has not filled up with blocks, the next piece enters.
@@ -91,7 +110,7 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
             - z shape - Red
             - j shape - Blue
             - L shape - Orange
-        - Immediately drop one space if no existing Block is in its path
+        - Immediately drop one space if no existing block is in its path
         - The pieces selection will be done random from all available pieces
         - Initial rotation will be selected random from all possible piece rotations
         - Standard mapping for keyboard:
@@ -160,37 +179,42 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
         - When dealing with a two-deep hole, make room for both J and L instead of blocking one off.
         - When having two open columns, deal with it as soon as possible. Over stacking will make things worse by having to wait on even more l shapes.
 
-    -   #### Diagram Legend
 
-
-
-The purpose of this is to fulfill user story:
+<!-- The purpose of this is to fulfill user story:
 > 
 
 
 The purpose of this is to fulfill user story:
-> 
+>  -->
 
-Custom CSS will be used to make the Website responsive by the use of media queries.
+- Custom CSS will be used to make the Website responsive by the use of media queries.
 
-The website will be responsive and the layouts will change dependant on screen size. This is to ensure content flow is appealing,
+<!-- - The website will be responsive and the layouts will change dependant on screen size. This is to ensure content flow is appealing,
 images are displayed properly and that the content is not shrunk side by side, so small that it is unreadable.
 The purpose of this is to fulfill user story:
-> As a First Time user, I want to view the game and content clearly on my mobile device.
+> As a First Time user, I want to view the game and content clearly on my mobile device. -->
 
-The 404.html error page will appear in case the page users are looking for cannot be found. It has an error message to let users know something went wrong and a button linked to the home page index.html.
-> This let users know they are still on the same website but the page cannot be loaded and they save the option to go back to the home page.
-
-An icon in made with Favicon will be displayed in the browser's tab.
+- An icon in made with Favicon will be displayed in the browser's tab.
 > This let users easily find the page in the browser.
 
 -   ### Design
     -   #### Colour Scheme
-        -   The main colours used are: 
+        - The main colours used are: 
+            - button hover: #ccc
+            - button pressed: #8f8
+            - game area background grid: #000
+            - game area background squares: #444
+            - modal h1, h2: #fffafa
+        - Tetromino colors:
+            - l shape - Cyan
+            - o shape - Yellow
+            - t shape - Purple
+            - s shape - Green
+            - z shape - Red
+            - j shape - Blue
+            - L shape - Orange
 
     -   #### Typography
-        -   
-    -   #### Imagery
         -   
 
     -   #### Wireframes
@@ -205,21 +229,41 @@ Home Page<br>
  
 -   ### Existing Features
     - Initial modal with intructions and Play button
+    ![initial modal](assets/images/Features-images/start-modal.PNG)
+    <br>
     - Game Over modal
+    ![game over modal](assets/images/Features-images/game-over-modal.PNG)
+    <br>
     - Play / Pause button
     - Sounds button
+    - Instructions button
+    ![buttons](assets/images/Features-images/buttons.PNG)
+    <br>
+    - Sound Effects
+    - Instructions Modal
+    ![instructions-keyboard-mouse](assets/images/Features-images/instructions.PNG)
+    ![instructions-touch](assets/images/Features-images/instructions-touch.PNG)
+    <br>
     - Next shape display
+    ![next-shape](assets/images/Features-images/next-shape.PNG)
+    <br>
     - Top score display
     - Actual score display
     - Level display
+    ![game-stats](assets/images/Features-images/score-topScore-level.PNG)
+    <br>
     - Rotation system
     - Collision detection
     - Keyboard controls
     - Mouse controls
+    ![keyboard-mouse](assets/images/Features-images/keyboard-mouse.PNG)
+    <br>
     - Touch controls
+    ![touch-controls](assets/images/Features-images/touch-controls.PNG)
+    <br>
 
 - Icon in the browser tab<br>
-    ![browser-tab-icon](/assets/images/Features-images/)<br>
+    ![browser-tab-icon](assets/images/Features-images/favicon.PNG)<br>
 
 -   ### Features Left to Implement
     - Ghost piece
@@ -250,7 +294,7 @@ Home Page<br>
 	* Google chromes built in developer tools are used to inspect page elements and help debug issues with the site layout and test different CSS styles.
 * [Microsoft Excel](https://www.microsoft.com/en-us/microsoft-365/excel)
 	* This was used to create wireframes for 'The Skeleton Plane' stage of UX design.
-* [Techsini](http://techsini.com/multi-mockup/index.php)
+* [Techsini](http://techsini.com/multi-mockup/)
     * tecnisih.com Multi Device Website Mockup Generator was used to create the Mock up image in this README.
 * [Favicon](https://favicon.io/)
     * This was used to generate the icon on browser's tab.
@@ -264,25 +308,26 @@ Home Page<br>
 -   ### Test Strategy 
 
     -   #### Summary 
-
-        - random shape
-        - clocwise rotate and anti-clockwise rotate
-        - shapes hit the floor
-        - shapes hit left or right wall
-        - shapes hit another shape
-        - shape soft drop and hard drop
-        - shape colors 
-        - next shape display
-        - play / pause
-        - sound
-        - modal pop-up
-        - score adding up and display
-        - top score
-        - level update
-        - game speed
-        - lock in place delay
-        - game over
-        - instructions
+        - Manual testing will be done on three different browsers (Chrome,Firefox, Opera).
+        - Testing will be done for:
+            - random shape
+            - clocwise rotate and anti-clockwise rotate
+            - shapes hit the floor
+            - shapes hit left or right wall
+            - shapes hit another shape
+            - shape soft drop and hard drop
+            - shape colors 
+            - next shape display
+            - play / pause
+            - sound
+            - modal pop-up
+            - score adding up and display
+            - top score
+            - level update
+            - game speed
+            - lock in place delay
+            - game over
+            - instructions
         
     -   ### Test Results
 
@@ -394,19 +439,18 @@ Home Page<br>
                 - the sound gets back to initial state before pause (on or off) -> work as expected
 
      
-
+<!-- 
     - All Pages were run through the [W3C HTML Validator](https://validator.w3.org/) and showed no errors.<br>
     ![html-validation](/assets/images/HTML-CSS-Validators/html-validation-1.JPG)<br>
     ![html-validation](/assets/images/HTML-CSS-Validators/html-validation-2.JPG)<br>
 
     - CSS Stylesheet was run through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator) and showed no errors.<br>
-    ![css-validation](/assets/images/HTML-CSS-Validators/css-validation.JPG)<br>
+    ![css-validation](/assets/images/HTML-CSS-Validators/css-validation.JPG)<br> -->
 
-    - Website was tested by running locally and tested on the deployed version on three different browsers:
+    - Website was tested by running locally and tested on the deployed     version on three different browsers:
         - Google Chrome: 
         - Opera: 
         - Mozilla Firefox: <br>
-    - Test header's logo to redirect to index.html (on all pages) - worked as expected on all tested browsers
 
     - ### Issues and Resolutions to issues found during testing
         - Tetrominoes where passing through the bottom of the board:
