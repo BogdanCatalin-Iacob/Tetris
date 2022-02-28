@@ -630,12 +630,12 @@ function levelUp(clearedlines) {
  * When the tetrominoes touch the top of the game board the game ends
  */
 function gameOver() {
-    let modalBox = document.getElementById("intructions");
+    let modalBox = document.getElementById("instructions");
 
     //check the row under miniGrid (row 5 of the main grid) for any taken square
     for (let i = 40; i <= 49; i++) {
         if (squares[i].classList.contains('taken')) {
-            playPause(); //pause the game 
+            playPause(); //pause the game
             undrawTetromino();
             removeEventsListeners(); //remove event listeners
 
@@ -775,7 +775,7 @@ function controls(event) {
  * Handle mouse controls, slide left / right and rotate clockwise
  */
 function handleEvent(event) {
-
+event.preventDefault();
     switch (event.type) {
         case "mouseenter":
             initialMousePosition = event.clientX;
@@ -806,6 +806,7 @@ function handleEvent(event) {
  * and set a timeout used for tap detection
  */
 function handleTouchStart(event) {
+    event.preventDefault();
     startTouchX = event.touches[0].clientX;
     startTouchY = event.touches[0].clientY;
     isTaplength = true;
@@ -821,6 +822,7 @@ function handleTouchStart(event) {
  * Move the tetrominoes left, right or down when swipe (use on touch screen devices)
  */
 function handleTouchMove(event) {
+    event.preventDefault();
     let touchMoveX = event.touches[0].clientX;
     let touchMoveY = event.touches[0].clientY;
 
@@ -845,10 +847,11 @@ function handleTouchMove(event) {
  * a single clockwise rotation will happen (use on touch screen devices)
  */
 function handleTouchEnd(event) {
+    event.preventDefault();
     let endTouchX = event.changedTouches[0].clientX;
     let endTouchY = event.changedTouches[0].clientY;
 
-    if (isTaplength && ((endTouchX - startTouchX) < 50 || (endTouchY - startTouchY) < 50)) {
+    if (isTaplength && ((endTouchX - startTouchX) < 100 || (endTouchY - startTouchY) < 100)) {
         rotate();
     }
 }
