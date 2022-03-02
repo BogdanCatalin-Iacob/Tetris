@@ -329,6 +329,7 @@ function freezeTetromino() {
             (squares[currentPosition + index + width].classList.contains("taken")))) {
         freeze = true;
         currentTetromino.forEach(index => squares[currentPosition + index].classList.add("taken"));
+        drawTetromino();
 
         //assign the next tetromino to the current tetromino
         [currentTetromino, currentShape, currentRotation] = [nextTetromino, nextShape, nextRotation];
@@ -402,6 +403,7 @@ function isAtRight() {
     return currentTetromino.some(index => (currentPosition + index + 1) % width === 0);
 }
 
+//credit: Ania Kubow (https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
 /**
  * Check if the tetromino is at the left edge of the board
  */
@@ -409,14 +411,15 @@ function isAtLeft() {
     return currentTetromino.some(index => (currentPosition + index) % width === 0);
 }
 
+//credit: Ania Kubow (https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
 /**
  * Check the position for next rotation of the shape at the edge of the board
  * and collision with other blocks
  * before it is displayed in the new or same position position
  */
-function checkRotatedPosition(P) {
-    P = P || currentPosition; //get current position.  Then, check if the piece is near the left side.
-    if ((P + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
+function checkRotatedPosition(shapeLocation) {
+    shapeLocation = shapeLocation || currentPosition; //get current position.  Then, check if the piece is near the left side.
+    if ((shapeLocation + 1) % width < 4) { //add 1 because the position index can be 1 less than where the piece is (with how they are indexed).     
         if (isAtRight()) { //use actual position to check if it's flipped over to right side
             currentPosition += 1; //if so, add one to wrap it back around
 
@@ -425,9 +428,9 @@ function checkRotatedPosition(P) {
                 currentPosition--;
                 currentRotation++;
             }
-            checkRotatedPosition(P); //check again.  Pass position from start, since long block might need to move more.
+            checkRotatedPosition(shapeLocation); //check again.  Pass position from start, since long block might need to move more.
         }
-    } else if (P % width > 5) {
+    } else if (shapeLocation % width > 5) {
         if (isAtLeft()) {
             currentPosition -= 1;
 
@@ -436,7 +439,7 @@ function checkRotatedPosition(P) {
                 currentPosition++;
                 currentRotation--;
             }
-            checkRotatedPosition(P);
+            checkRotatedPosition(shapeLocation);
         }
     }
 }
