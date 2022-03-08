@@ -55,7 +55,6 @@ button:active {
 #game-area {
     min-width: fit-content;
     max-width: 20%;
-    margin: auto;
     justify-content: center;
     position: relative;
     border: 1rem ridge #ccc;
@@ -223,7 +222,7 @@ button:active {
 
     #mobile-display {
         display: flex;
-        /* justify-content: space-around; */
+        justify-content: center;
     }
 
     /*mobile rotate / drop buttons */
@@ -288,5 +287,8 @@ button:active {
 
     #mobile-controls {
         display: none;
+    }
+    #game-area {
+        margin: auto;
     }
 }
