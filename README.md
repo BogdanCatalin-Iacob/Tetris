@@ -87,11 +87,11 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
         - The largest part of the tetris game consists of the playfield measuring ten spaces across by twenty spaces down. It has other parts explained below.
         - Randomly selected tetrominoes, or shapes consisting of four square blocks, fall from the top of the playfield one at a time. Each tetromino enters the playfield with a random orientation and a specific color depending on its shape. 
         - Part of the tetris game (top roght corner) measuring 4 spaces across and 4 spaces down is called the piece preview, and shows the next pieces that will enter the playfield.
-        - The player can rotate the falling tetromino ninety degrees (90deg) at a time within the playfield by pressing the clockwise rotation button (Arrow Up) / left mouse button / tap (on touch screens) or anti clockwise button (z) if the piece has room to rotate.
-        - The player can shift (slide) the falling tetromino sideways one space at a time by pressing the left arrow / move the mouse towards left / drag left (on touch screens) or right arrow / move the mouse towards right / drag right (on touch screens). 
+        - The player can rotate the falling tetromino ninety degrees (90deg) at a time within the playfield by pressing the clockwise rotation button (Arrow Up) or anti clockwise button (z) if the piece has room to rotate.
+        - The player can shift (slide) the falling tetromino sideways one space at a time by pressing the left arrow or right arrow on keyboard (large screens) or press the corresponding buttons on mobile devices. 
         - Pieces cannot shift through walls or other blocks.
         - Each tetromino moves downward slowly by itself. 
-        - Generally a player can use a method to "drop" the tetromino (pressing spacebar on keyboard), or make it move downward faster (pressing Down Arrow on keyboard or dragging down on touch devices). Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in place giving the player time to move it. After locking, a player can no longer move the tetromino.
+        - Generally a player can use a method to "drop" the tetromino (pressing spacebar on keyboard or corresponding button on mobile devices), or make it move downward faster (pressing Down Arrow on keyboard or corresponding button on mobile devices). Once the tetromino lands on the floor or other blocks, the piece will delay shortly before locking in place giving the player time to move it. After locking, a player can no longer move the tetromino.
         - When a tetromino locks and by doing so fills all empty spaces within one or more rows of the playfield, those full rows will clear. Remaining blocks above will move down by as many rows removed.
         - When lines are cleared some score will be awarded to player.
         - If the playfield has not filled up with blocks, the next piece enters.
@@ -120,19 +120,41 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
             - Down Arrow - move the piece down faster
             - z - rotate piece 90deg anti clockwise
             - space bar - hard drop
-        - Standard mapping for mouse:
-            - Slide mouse left - move the piece to left one cell if no obstruction
-            - Slide mouse right - move the piece to right one cell if no obstruction
-            - Left click - rotate the tetromino clockwise
-        - Standard mapping for touch
-            - Drag left - move the piece to left one cell if no obstruction
-            - Drag right - move the piece to right one cell if no obstruction
-            - Drag down - move the piece to down faster
-            - Tap - rotate clockwise
+        - Standard mapping for mobile
+            - mobile devices will have displayed two buttons on the sides of the playfield for left / right piece slide and
+             four buttons under the playfield for rotation and drop down
         - Use of half second initial lock delay which will be decreased when level is going up
         - Next shape is displayed immediately after the playing tetromino gets out of the top right corner (mini grid)
         - When a row is fully covered / taken it must dissapear and score must be increased (line clear)
-        - Top Score will be saved on local storage
+
+         - Custom CSS will be used to make the Website responsive by the use of media queries.
+        - The website will be responsive and the layouts will change dependant on screen size. This is to ensure content flow is appealing,
+            the game is displayed properly, the content is not shrunk side by side and the text is readable.
+        - The game will be resized to fit on the mobile screens and a set of buttons will be displayed to control the game.
+            - The purpose of this is to fulfill user story:
+            > I want to view the game and content clearly on my mobile device.
+
+        - An instruction modal will pop-up every time when the game is started.
+            An instructions buttons is displayed in the top right corner of the game and can be accessed at any time during the game.
+            ![instructions button](assets/images/Features-images/instructions-button.png)<br>
+            When instructions are displayed the game is paused.
+            - The purpose of this is to fulfill user story:
+            > I want to find the game instructions easily.
+
+        - Top score will be displayed in the top left corner and saved on local storage.
+            ![top score](assets/images/Features-images/score-topScore-level.PNG)<br>
+            - The purpose of this is to fulfill user story:
+            > I want to know what is the highest score.
+
+        - Keyboard keys are mapped (for large screens) and buttons are assigned (for mobile devices) to move down faster or drop the tetromino.
+        ![drop-down-keys](assets/images/Features-images/keyboard-drop.png)<br>
+        ![drop-down-buttons](assets/images/Features-images/mobile-drop.png)<br>
+            - The purpose of this is to fulfill user story:
+            > I want to be able to fast drop the pieces.
+
+        - An icon in made with Favicon will be displayed in the browser's tab.
+        !favicon](assets/images/Features-images/favicon.PNG)<br>
+            > This let users easily find the page in the browser.
 
     -   #### Game Mechanics
 
@@ -179,24 +201,6 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
         - When dealing with a two-deep hole, make room for both J and L instead of blocking one off.
         - When having two open columns, deal with it as soon as possible. Over stacking will make things worse by having to wait on even more l shapes.
 
-
-<!-- The purpose of this is to fulfill user story:
-> 
-
-
-The purpose of this is to fulfill user story:
->  -->
-
-- Custom CSS will be used to make the Website responsive by the use of media queries.
-
-<!-- - The website will be responsive and the layouts will change dependant on screen size. This is to ensure content flow is appealing,
-images are displayed properly and that the content is not shrunk side by side, so small that it is unreadable.
-The purpose of this is to fulfill user story:
-> As a First Time user, I want to view the game and content clearly on my mobile device. -->
-
-- An icon in made with Favicon will be displayed in the browser's tab.
-> This let users easily find the page in the browser.
-
 -   ### Design
     -   #### Colour Scheme
         - The main colours used are: 
@@ -220,6 +224,7 @@ The purpose of this is to fulfill user story:
     -   #### Wireframes
 Home Page<br>
 ![Home Page Wireframe](assets/images/Wireframes/wieframes.PNG)<br>
+![Mobile Wireframe](assets/images/Features-images/mobile-wireframe.png)<br>
 
 -   ### Limitations
     - Top score is saved on local storage due to no database
@@ -241,8 +246,7 @@ Home Page<br>
     <br>
     - Sound Effects
     - Instructions Modal
-    ![instructions-keyboard-mouse](assets/images/Features-images/instructions.PNG)
-    ![instructions-touch](assets/images/Features-images/instructions-touch.PNG)
+    ![instructions-keyboard](assets/images/Features-images/instructions-modal.PNG.jpg)
     <br>
     - Next shape display
     ![next-shape](assets/images/Features-images/next-shape.PNG)
@@ -255,13 +259,7 @@ Home Page<br>
     - Rotation system
     - Collision detection
     - Keyboard controls
-    - Mouse controls
-    ![keyboard-mouse](assets/images/Features-images/keyboard-mouse.PNG)
-    <br>
-    - Touch controls
-    ![touch-controls](assets/images/Features-images/touch-controls.PNG)
-    <br>
-
+    
 - Icon in the browser tab<br>
     ![browser-tab-icon](assets/images/Features-images/favicon.PNG)<br>
 
@@ -269,6 +267,8 @@ Home Page<br>
     - Ghost piece
     - Ask name of the player before game start
     - Save name, level, top score on cloud
+    - Touch gestures
+    - Mouse controls
 
 ***
 
@@ -280,8 +280,6 @@ Home Page<br>
 	* This project uses custom written CSS to style the Website.
 * JavaScript
     * This project is interactive with the help of JavaScript
-* [Font Awesome](https://fontawesome.com/)
-	* Font awesome Icons are used for the Social media links contained in the Footer section of the website and for the benefits found on the index.html page.
 * [Google Fonts](https://fonts.google.com/)
 	* Google fonts are used throughout the project to import the *Spectral* and *Lora* fonts.
 * [Gitpod](https://gitpod.io/)
@@ -337,10 +335,12 @@ Home Page<br>
 
         - #### Clockwise and Anti-Clockwise rotate 
             - rotation must display the shape in the next logical position by pressing:
-                - Up Arrow key for clockwise rotation
-                - Z key for Anti-Clockwise rotation 
-                - mouse left click for Clockwise rotation
-                - touch displays tap for Clockwise rotation
+                - Up Arrow key for clockwise rotation -> work as expected
+                - Z key for Anti-Clockwise rotation  -> work as expected
+
+                Mobile:
+                - Clockwise rotation button -> work as expected
+                - Anti-clockwise rotation button -> work as expected
             - if the next rotated position is getting the shape over the walls /floor limit or overlap another shape it will be reverted and the shape appears in the previous rotation
             -  work as expected
 
@@ -349,14 +349,12 @@ Home Page<br>
 
         - #### Shape hit the left or right wall
             - if the shape touches the left or right wall with any of the sides it must not go through and continue normal moving down
-                - Left Arrow key for sliding left
-                - Right Arrow key for sliding right 
-                - Move mouse left for sliding left
-                - Move mouse right for sliding right
-                - Touch displays:
-                    - Drag left for sliding left
-                    - Drag right for sliding right
-            - work as expected
+                - Left Arrow key for sliding left -> work as expected
+                - Right Arrow key for sliding right -> work as expected
+
+                Mobile:
+                - Left button for sliding left -> work as expected
+                - Right button for sliding right -> work as expected
 
         - #### Shape hit the another shape
             - if the shape touches another shape with any of the sides it must not overlap -> work as expected
@@ -364,8 +362,9 @@ Home Page<br>
 
         - #### Shape soft drop and hard drop
             - faster down movement can be done by pressing Down Arrow Key -> work as expected
-            - faster down movement on mobile devices can be don e by dragging down -> work as expected
+            - faster down movement on mobile devices can be done by pressing Move Down button -> work as expected
             - instant drop can be done by pressing Spacebar key - it will place the shape on the last available free space and lock it in place with no delay -> work as expected
+            - instant drop on mobile can be done by pressing Drop button  -> work as expected
             
         - #### Shape color
             - each shape must have its own color (as described in [list of rules](#list-of-rules)) and keep it throughout the game -> work as expected
@@ -389,10 +388,9 @@ Home Page<br>
 
         - #### Modal pop-up
             - start-up modal  displays game controls:
-                - for screens over 1024px keyboard and mouse controls -> work as expected
-                - for screens under 1024px touch controls -> work as expected
+                - for screens over 1024px keyboard, instructions and "Play" button are displayed -> work as expected
+                - for screens under 1024px instructions and "Play" button are displayed -> work as expected
                 - "Play" button will close the modal and start the game -> work as expected
-                - "Close" button will close the modal, but will not start the game -> work as expected
 
         - #### Score adding up and display
             - each time the player clears lines variable points will be awarded based on [scoring system](#scoring-system) -> work as expected
@@ -430,8 +428,8 @@ Home Page<br>
 
         - #### Instructions
             - when instructions button is clicked a set of helping information and an image of the controls will be displayed
-                - if the screen size is under 1024px an image of touch controls is displayed -> work as expected
-                - if the screen size is over 1024px an image of keyboard and mouse is displayed -> work as expected  
+                - if the screen size is under 1024px a pop-up with instructions is displayed -> work as expected
+                - if the screen size is over 1024px an image of keyboard and instructions are displayed -> work as expected  
                 - the game is paused -> work as expected
                 - the sound is turned off (if on) -> work as expected
             - when instructions modal is closed:
