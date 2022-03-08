@@ -58,13 +58,15 @@
     * [Acknowledgements](#Acknowledgements)
     * [Comments](#Comments)
 
+***
 ## Purpose
 This Game was created for the sole purpose of completing the second Milestone Project for the Code Institute's Full Stack Developer course. 
 It was built using the knowledge gained from the HTML, CSS, User Centric Design and JavaScript modules. A full list of technologies used can be found in the technologies section of this document.
 
-The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetris/).
-<!-- ![Website Mock Up](/assets/images/) -->
+The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetris/).<br>
+![Website Mock Up](assets/images/mockups.jpg)<br>
 
+***
 ## User Experience (UX)
 
 -   ### User stories
@@ -135,25 +137,27 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
             > I want to view the game and content clearly on my mobile device.
 
         - An instruction modal will pop-up every time when the game is started.
-            An instructions buttons is displayed in the top right corner of the game and can be accessed at any time during the game.
+            An instructions buttons is displayed in the top right corner of the game and can be accessed at any time during the game.<br>
             ![instructions button](assets/images/Features-images/instructions-button.png)<br>
             When instructions are displayed the game is paused.
             - The purpose of this is to fulfill user story:
             > I want to find the game instructions easily.
 
-        - Top score will be displayed in the top left corner and saved on local storage.
+        - Top score will be displayed in the top left corner and saved on local storage.<br>
             ![top score](assets/images/Features-images/score-topScore-level.PNG)<br>
             - The purpose of this is to fulfill user story:
             > I want to know what is the highest score.
 
-        - Keyboard keys are mapped (for large screens) and buttons are assigned (for mobile devices) to move down faster or drop the tetromino.
+        - Keyboard keys are mapped (for large screens) and buttons are assigned (for mobile devices) to move down faster or drop the tetromino.<br>
+        Keyboard:
         ![drop-down-keys](assets/images/Features-images/keyboard-drop.png)<br>
+        Mobile:<br>
         ![drop-down-buttons](assets/images/Features-images/mobile-drop.png)<br>
             - The purpose of this is to fulfill user story:
             > I want to be able to fast drop the pieces.
 
         - An icon in made with Favicon will be displayed in the browser's tab.
-        !favicon](assets/images/Features-images/favicon.PNG)<br>
+        ![favicon](assets/images/Features-images/favicon.PNG)<br>
             > This let users easily find the page in the browser.
 
     -   #### Game Mechanics
@@ -219,12 +223,13 @@ The live website can be found [here](https://bogdancatalin-iacob.github.io/Tetri
             - L shape - Orange
 
     -   #### Typography
-        -   
+        -   The Roboto font is the main font used throughout the whole website with Arial as the fallback font in case for any reason the font isn't being imported into the site correctly.
 
     -   #### Wireframes
-Home Page<br>
+Desktop view<br>
 ![Home Page Wireframe](assets/images/Wireframes/wieframes.PNG)<br>
-![Mobile Wireframe](assets/images/Features-images/mobile-wireframe.png)<br>
+Mobile view<br>
+![Mobile Wireframe](assets/images/Wireframes/mobile-wireframe.png)<br>
 
 -   ### Limitations
     - Top score is saved on local storage due to no database
@@ -233,27 +238,27 @@ Home Page<br>
 ## Features
  
 -   ### Existing Features
-    - Initial modal with intructions and Play button
+    - Initial modal with intructions and Play button<br>
     ![initial modal](assets/images/Features-images/start-modal.PNG)
     <br>
-    - Game Over modal
+    - Game Over modal<br>
     ![game over modal](assets/images/Features-images/game-over-modal.PNG)
     <br>
     - Play / Pause button
     - Sounds button
-    - Instructions button
+    - Instructions button<br>
     ![buttons](assets/images/Features-images/buttons.PNG)
     <br>
     - Sound Effects
-    - Instructions Modal
+    - Instructions Modal<br>
     ![instructions-keyboard](assets/images/Features-images/instructions-modal.PNG.jpg)
     <br>
-    - Next shape display
+    - Next shape display<br>
     ![next-shape](assets/images/Features-images/next-shape.PNG)
     <br>
     - Top score display
     - Actual score display
-    - Level display
+    - Level display<br>
     ![game-stats](assets/images/Features-images/score-topScore-level.PNG)
     <br>
     - Rotation system
@@ -271,7 +276,6 @@ Home Page<br>
     - Mouse controls
 
 ***
-
 ## Technologies
 
 * HTML
@@ -300,7 +304,6 @@ Home Page<br>
     * Keycode website was used to get the arrow key codes to move the tetrominoes on the game board
 
 ***
-
 ## Testing
 
 -   ### Test Strategy 
@@ -436,14 +439,14 @@ Home Page<br>
                 - the game resumes -> work as expected
                 - the sound gets back to initial state before pause (on or off) -> work as expected
 
-     
-<!-- 
-    - All Pages were run through the [W3C HTML Validator](https://validator.w3.org/) and showed no errors.<br>
-    ![html-validation](/assets/images/HTML-CSS-Validators/html-validation-1.JPG)<br>
-    ![html-validation](/assets/images/HTML-CSS-Validators/html-validation-2.JPG)<br>
+    - The html page was run through the [W3C HTML Validator](https://validator.w3.org/) and showed no errors.<br>
+    ![html-validation](assets/images/html-validator.jpg)<br>
 
     - CSS Stylesheet was run through the [W3C CSS Validator](https://jigsaw.w3.org/css-validator/validator) and showed no errors.<br>
-    ![css-validation](/assets/images/HTML-CSS-Validators/css-validation.JPG)<br> -->
+    ![css-validation](assets/images/css-validator.jpg)<br>
+
+    - JS script was run through the [JSHint](https://jshint.com/) and showed no errors.<br>
+    ![js-validation](assets/images/js-validator.jpg)<br>
 
     - Website was tested by running locally and tested on the deployed     version on three different browsers:
         - Google Chrome: 
@@ -472,6 +475,7 @@ Home Page<br>
         - When the tetromino was moved left / right or down using mouse / touch controls the blocks disappeared before locking in place.
             - the solution was to call freezeTetromino() after each move to ensure the blocks lock in place and remain displayed
 
+***
 ## Deployment
 
 -   ### Project Creation
@@ -503,9 +507,8 @@ The project was started by navigating to the [template](https://github.com/Code-
 ## Credits
 -   ### Code
     - The code for tetromino rotation at the edge of the board (left / right) was taken from [Ania Kubow](https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
-    - The code for touch controls is based on the youtube tutorial [RTS CMK](https://www.youtube.com/watch?v=BzNFBs4p3FE)
     - The code for repeted sound play (each time when a tetromino is moved) was taken from [Mt. Ford Studios](https://www.youtube.com/watch?v=LfSBbrGqFV0)
-    - The code to make laft / right buttons text upright was taken from [freecodecamp](https://forum.freecodecamp.org/t/vertical-text-in-button/348447/3)
+    - The code to make left / right buttons text upright was taken from [freecodecamp](https://forum.freecodecamp.org/t/vertical-text-in-button/348447/3)
    
 -   ### Content
     - The game is developed based on some rules found on [tetris wiki](https://tetris.fandom.com/wiki/Tetris_Wiki):
@@ -516,7 +519,7 @@ The project was started by navigating to the [template](https://github.com/Code-
 -   ### Media
     - The sound effects were taken from [MixKit](https://mixkit.co/free-sound-effects/arcade/)
     - The background music was taken from [Chosic](https://www.chosic.com/download-audio/28361/)
-    - The keyboard, mouse and touch images used in instructions are made by me (Bogdan Iacob)
+    - The keyboard image used in instructions is made by me (Bogdan Iacob)
 
 -   ### Acknowledgements
     - I'd like to thank my mentor Daisy McGirr for her guidance throughout my project.<br>
