@@ -24,14 +24,6 @@ let clearSound = new Sounds("assets/Sound-Effects/mixkit-arcade-game-complete-or
 let dropSound = new Sounds("assets/Sound-Effects/mixkit-martial-arts-fast-punch-2047.wav", 20, soundVolume + 0.2);
 let backgroundSound = new Audio("assets/Sound-Effects/Snow-field.mp3");
 
-//mouse variable
-let initialMousePosition;
-
-//touch buttons
-// let startTouchX;
-// let startTouchY;
-// let tapTimeOut;
-// let isTaplength;
 const buttonLeft = document.getElementById("button-left");
 const buttonRight = document.getElementById("button-right");
 const buttonRotateLeft = document.getElementById("button-rotate-left");
