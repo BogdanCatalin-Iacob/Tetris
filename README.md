@@ -507,6 +507,7 @@ The project was started by navigating to the [template](https://github.com/Code-
     - The code for tetromino rotation at the edge of the board (left / right) was taken from [Ania Kubow](https://github.com/kubowania/Tetris-Basic/blob/a5b4d2bb17ca01234f23803c8fe86ee893b4bd45/app.js#L152)
     - The code for touch controls is based on the youtube tutorial [RTS CMK](https://www.youtube.com/watch?v=BzNFBs4p3FE)
     - The code for repeted sound play (each time when a tetromino is moved) was taken from [Mt. Ford Studios](https://www.youtube.com/watch?v=LfSBbrGqFV0)
+    - The code to make laft / right buttons text upright was taken from [freecodecamp](https://forum.freecodecamp.org/t/vertical-text-in-button/348447/3)
    
 -   ### Content
     - The game is developed based on some rules found on [tetris wiki](https://tetris.fandom.com/wiki/Tetris_Wiki):

@@ -27,11 +27,17 @@ let backgroundSound = new Audio("assets/Sound-Effects/Snow-field.mp3");
 //mouse variable
 let initialMousePosition;
 
-//touch variable
-let startTouchX;
-let startTouchY;
-let tapTimeOut;
-let isTaplength;
+//touch buttons
+// let startTouchX;
+// let startTouchY;
+// let tapTimeOut;
+// let isTaplength;
+const buttonLeft = document.getElementById("button-left");
+const buttonRight = document.getElementById("button-right");
+const buttonRotateLeft = document.getElementById("button-rotate-left");
+const buttonRotateRight = document.getElementById("button-rotate-right");
+const buttonMoveDown = document.getElementById("button-move-down");
+const buttonDrop = document.getElementById("button-drop");
 
 let gameSpeed = 1000; //initial speed of the game
 let lockDelay = 500; //initial delay before a tetromino is locked in place
@@ -358,7 +364,7 @@ function moveLeft() {
             currentPosition > 26 && currentPosition < 30 ||
             currentPosition > 36) && !isAtLeftEdge;
 
-    if(miniGridTrue){
+    if (miniGridTrue) {
         currentPosition--;
     }
 
@@ -671,13 +677,12 @@ function removeEventsListeners() {
 
     modalPlay.removeEventListener("click", playPause);
 
-    gridContainer.removeEventListener("mouseenter", handleEvent);
-    gridContainer.removeEventListener("mousemove", handleEvent);
-    gridContainer.removeEventListener("click", handleEvent);
-
-    gridContainer.removeEventListener("touchstart", handleTouchStart);
-    gridContainer.removeEventListener("touchmove", handleTouchMove);
-    gridContainer.removeEventListener("touchend", handleTouchEnd);
+    buttonLeft.removeEventListener("click", moveLeft);
+    buttonRight.removeEventListener("click", moveRight);
+    buttonRotateLeft.removeEventListener("click", rotateAntiClockwise);
+    buttonRotateRight.removeEventListener("click", rotate);
+    buttonMoveDown.removeEventListener("click", moveDown);
+    buttonDrop.removeEventListener("click", hardDrop);
 }
 
 /**
@@ -723,9 +728,14 @@ function instructions() {
 
     //assign new content to the instruction modal (game instructions)
     document.getElementById("instructions").innerHTML = `
-        <h1>Instructions!</h1>
-                <br>
-        <a href="#" onclick="closeModal(); playPause();" title="Close" class="modal-close">Close</a>
+    
+         <h1>Instructions!</h1>
+                 <br>
+        <a href="#" onclick="closeModal(); playPause();" title="Close" class="modal-close">Close</a> 
+
+        <img id="keyboard-controls" src="assets/images/keyboard-layout.PNG"
+        alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
+        up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume"/>
         
         <p>- Try to stack flat, but allow S and Z tetrominoes to stack without creating gaps. A
             flat field will allow a player to rotate less, which saves time. A player will also have more
@@ -737,14 +747,7 @@ function instructions() {
             same idea applies to L tetrominoes, either at a wall or at the edge</p>
         <p>- When dealing with a two-deep hole, make room for both J and L instead of blocking one off.</p>
         <p>- When having two open columns, deal with it as soon as possible. Over stacking will make things
-            worse by having to wait on even more l shapes.</p>
-
-        <img id="keyboard-controls" src="assets/images/keyboard-mouse.PNG"
-            alt="image of keyboard controls, left / right arrow keys slide tetrominoes left or right, down arrow key soft drop,
-        up arrow key rotate clockwise, z key rotate anti-clockwise, space bar key hard drop the tetromino, esc key pause / resume"/>
-        
-        <img id="touch-controls" src="assets/images/touch-controls.PNG"
-                alt="drawing of a hand with instruction to swipe left, right or down for tetromino movement and tap for rotation of the tetromino"/>`; 
+            worse by having to wait on even more l shapes.</p>`;
 
     //open modal with new content
     openModal();
@@ -774,92 +777,6 @@ function controls(event) {
     }
 }
 
-/**
- * Handle mouse controls, slide left / right and rotate clockwise
- */
-function handleEvent(event) {
-event.preventDefault();
-    switch (event.type) {
-        case "mouseenter":
-            initialMousePosition = event.clientX;
-            break;
-        case "mousemove":
-            let mousePosition = event.clientX;
-
-            if (mousePosition % 10 === 0) {
-                if (mousePosition > initialMousePosition) {
-                    moveRight();
-                } else {
-                    moveLeft();
-                }
-                freezeTetromino();
-            }
-            initialMousePosition = mousePosition;
-            break;
-        case "click":
-            rotate();
-            break;
-        default:
-            return;
-    }
-}
-
-/**
- * Register initial touch point to determine movement direction
- * and set a timeout used for tap detection
- */
-function handleTouchStart(event) {
-    event.preventDefault();
-    startTouchX = event.touches[0].clientX;
-    startTouchY = event.touches[0].clientY;
-    isTaplength = true;
-    if (tapTimeOut) {
-        clearTimeout(tapTimeOut);
-    }
-    tapTimeOut = setTimeout(() => {
-        isTaplength = false;
-    }, 200);
-}
-
-/**
- * Move the tetrominoes left, right or down when swipe (use on touch screen devices)
- */
-function handleTouchMove(event) {
-    event.preventDefault();
-    let touchMoveX = event.touches[0].clientX;
-    let touchMoveY = event.touches[0].clientY;
-
-    //allows a longer swipe distance with for less travelling distance when divided by 10px
-    if (touchMoveX % 10 === 0) {
-        touchMoveX < startTouchX ? moveLeft() : moveRight();
-        freezeTetromino();
-    }
-
-    //allows a longer swipe distance with for less travelling distance when divided by 10px
-    if (touchMoveY % 10 === 0) {
-        if (touchMoveY > startTouchY) {
-            moveDown();
-            freezeTetromino();
-        }
-    }
-}
-
-/**
- * Handle the tap event. If the touch is less than 200ms,
- * start touch and end touch are approximately equal(less than 50px between them)
- * a single clockwise rotation will happen (use on touch screen devices)
- */
-function handleTouchEnd(event) {
-    event.preventDefault();
-    let endTouchX = event.changedTouches[0].clientX;
-    let endTouchY = event.changedTouches[0].clientY;
-
-    if (isTaplength && ((endTouchX - startTouchX) < 100 || (endTouchY - startTouchY) < 100)) {
-        rotate();
-    }
-}
-
-
 document.addEventListener("keyup", controls);
 
 playButton.addEventListener("click", playPause);
@@ -869,11 +786,10 @@ soundsButton.addEventListener("click", playSounds);
 instructionsButton.addEventListener("click", instructions);
 
 modalPlay.addEventListener("click", playPause);
-gridContainer.addEventListener("mouseenter", handleEvent);
-gridContainer.addEventListener("mousemove", handleEvent);
-gridContainer.addEventListener("click", rotate);
 
-//touch controls events
-gridContainer.addEventListener("touchstart", handleTouchStart);
-gridContainer.addEventListener("touchmove", handleTouchMove);
-gridContainer.addEventListener("touchend", handleTouchEnd);
+buttonLeft.addEventListener("click", moveLeft);
+buttonRight.addEventListener("click", moveRight);
+buttonRotateLeft.addEventListener("click", rotateAntiClockwise);
+buttonRotateRight.addEventListener("click", rotate);
+buttonMoveDown.addEventListener("click", moveDown);
+buttonDrop.addEventListener("click", hardDrop);
