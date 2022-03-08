@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 /*--------------------
 |       General       |
  --------------------*/
@@ -6,6 +8,7 @@
     border: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Roboto, Arial, sans-serif;
 }
 
 header {
